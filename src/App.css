@@ -1,6 +1,45 @@
-.square {
-  display: inline-block;
+.container{
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  grid-gap: 10px;
 }
-.circle {
-  display: inline-block;
+.errorMsg{
+  width: 100%;
+  margin: 0;
+  padding: 1.25rem;
+  color: #550000;
+  text-align: center;
+  font-size: 1.25rem;
+}
+.cell{
+  justify-self: center;
+  align-self: center;
+}
+.cell-00{
+  grid-area: 1 / 1 / 2 / 2;
+}
+.cell-01{
+  grid-area: 1 / 2 / 2 / 3;
+}
+.cell-02{
+  grid-area: 1 / 3 / 2 / 4;
+}
+.cell-10{
+  grid-area: 2 / 1 / 3 / 2;
+}
+.cell-11{
+  grid-area: 2 / 2 / 3 / 3;
+}
+.cell-12{
+  grid-area: 2 / 3 / 3 / 4;
+}
+.cell-20{
+  grid-area: 3 / 1 / 4 / 2;
+}
+.cell-21{
+  grid-area: 3 / 2 / 4 / 3;
+}
+.cell-22{
+  grid-area: 3 / 3 / 4 / 4;
 }
