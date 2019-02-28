@@ -1,14 +1,41 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+.home{
+  width: 100%;
+}
+.togglePlayer{
+  text-align: center;
+}
+.togglePlayerBtn{
+  width: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1.6rem;
+  color: #ffffff;
+  font-size: 1.6rem;
+}
+.x{
+  background-color: #0000cc;
+}
+.o{
+  background-color: #00aa00;
+}
 .container{
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
   display: grid;
+  justify-content: center;
   grid-template-columns: repeat(3, 100px);
   grid-template-rows: repeat(3, 100px);
   grid-gap: 10px;
 }
 .errorMsg{
-  width: 100%;
   margin: 0;
   padding: 1.25rem;
-  color: #550000;
+  color: #990000;
   text-align: center;
   font-size: 1.25rem;
 }
