@@ -7,6 +7,8 @@ class Home extends Component {
     super(props);
     this.state = {
       player: "x",
+      xScore: 0,
+      oScore: 0,
       errorMsg: "",
       grid:
         [
@@ -26,6 +28,7 @@ class Home extends Component {
     this.containers = [];
     this.toggleButton = React.createRef();
     this.toggleButtonText = "Play As O";
+    this.turn = 0;
   }
 
   componentDidUpdate() {
@@ -69,6 +72,8 @@ class Home extends Component {
       let cells = this.state.grid;
       cells[gridNumber][cellName] = this.state.player;
       this.setState({grid:cells, errorMsg:""});
+      this.turn += 1;
+      this.updateScore(gridNumber, cellName);
     } else if (this.state.grid[gridNumber][cellName] === "x" || this.state.grid[gridNumber][cellName] === "o") {
       this.setState({errorMsg:"Please select an empty square"});
     }
@@ -127,25 +132,19 @@ class Home extends Component {
     }
   }
 
-  svgHolder = () => {
-    return(
-      {/*
-        <svg height="100" width="100">
-          <circle cx="50" cy="50" r="50" fill="red" />
-        </svg>
-        <svg width="100" height="100">
-          <rect width="100" height="100" fill="rgb(0,0,255)" />
-        </svg>
-        <svg width="100" height="100">
-          <rect width="100" height="100" fill="rgb(255,255,255)" strokeWidth="2" stroke="rgb(60,60,60)"/>
-        </svg>
-      */}
-    );
+  updateScore = (gridNumber, cellName) => {
+    if(this.turn > 4) {
+      
+    }
   }
 
   render() {
     return(
       <div className="Home">
+        <div className="scoreboard">
+          <h1 className="score">X : {this.state.xScore} | O : {this.state.oScore}</h1>
+          <h1 className="turn">Turn : {this.turn}</h1>
+        </div>
         <div className="togglePlayer">
           <button className="x togglePlayerBtn" onClick={(event) => this.togglePlayer(event)} ref={(element) => {this.toggleButton = element;}}>{this.toggleButtonText}</button>
         </div>
@@ -421,6 +420,9 @@ class Home extends Component {
           </div>
         </div>
         <div className="errorMsg">{this.state.errorMsg}</div>
+        <div className="footer">
+          <div className="footerText">&#169; <a href="https://raymondmutyaba.com/" className="copyrightText">Raymond Mutyaba</a> 2019</div>
+        </div>
       </div>
     );
   }
