@@ -133,8 +133,71 @@ class Home extends Component {
   }
 
   updateScore = (gridNumber, cellName) => {
-    if(this.turn > 4) {
-      
+    let xScore = this.state.xScore;
+    let oScore = this.state.oScore;
+    //Container 04
+    if(this.turn > 4 && this.turn <= 9) {
+      //Horizontal
+      if(cellName === "cell-36" || cellName === "cell-37" || cellName === "cell-38") {
+        if(this.state.grid[gridNumber]["cell-36"] === "x" && this.state.grid[gridNumber]["cell-37"] === "x" && this.state.grid[gridNumber]["cell-38"] === "x") {
+          xScore += 1;
+        } else if(this.state.grid[gridNumber]["cell-36"] === "o" && this.state.grid[gridNumber]["cell-37"] === "o" && this.state.grid[gridNumber]["cell-38"] === "o") {
+          oScore += 1;
+        }
+      }
+      if(cellName === "cell-39" || cellName === "cell-40" || cellName === "cell-41") {
+        if(this.state.grid[gridNumber]["cell-39"] === "x" && this.state.grid[gridNumber]["cell-40"] === "x" && this.state.grid[gridNumber]["cell-41"] === "x") {
+          xScore += 1;
+        } else if(this.state.grid[gridNumber]["cell-39"] === "o" && this.state.grid[gridNumber]["cell-40"] === "o" && this.state.grid[gridNumber]["cell-41"] === "o") {
+          oScore += 1;
+        }
+      }
+      if(cellName === "cell-42" || cellName === "cell-43" || cellName === "cell-44") {
+        if(this.state.grid[gridNumber]["cell-42"] === "x" && this.state.grid[gridNumber]["cell-43"] === "x" && this.state.grid[gridNumber]["cell-44"] === "x") {
+          xScore += 1;
+        } else if(this.state.grid[gridNumber]["cell-42"] === "o" && this.state.grid[gridNumber]["cell-43"] === "o" && this.state.grid[gridNumber]["cell-44"] === "o") {
+          oScore += 1;
+        }
+      }
+      //Vertical
+      if(cellName === "cell-36" || cellName === "cell-39" || cellName === "cell-42") {
+        if(this.state.grid[gridNumber]["cell-36"] === "x" && this.state.grid[gridNumber]["cell-39"] === "x" && this.state.grid[gridNumber]["cell-42"] === "x") {
+          xScore += 1;
+        } else if(this.state.grid[gridNumber]["cell-36"] === "o" && this.state.grid[gridNumber]["cell-39"] === "o" && this.state.grid[gridNumber]["cell-42"] === "o") {
+          oScore += 1;
+        }
+      }
+      if(cellName === "cell-37" || cellName === "cell-40" || cellName === "cell-43") {
+        if(this.state.grid[gridNumber]["cell-37"] === "x" && this.state.grid[gridNumber]["cell-40"] === "x" && this.state.grid[gridNumber]["cell-43"] === "x") {
+          xScore += 1;
+        } else if(this.state.grid[gridNumber]["cell-37"] === "o" && this.state.grid[gridNumber]["cell-40"] === "o" && this.state.grid[gridNumber]["cell-43"] === "o") {
+          oScore += 1;
+        }
+      }
+      if(cellName === "cell-38" || cellName === "cell-41" || cellName === "cell-44") {
+        if(this.state.grid[gridNumber]["cell-38"] === "x" && this.state.grid[gridNumber]["cell-41"] === "x" && this.state.grid[gridNumber]["cell-44"] === "x") {
+          xScore += 1;
+        } else if(this.state.grid[gridNumber]["cell-38"] === "o" && this.state.grid[gridNumber]["cell-41"] === "o" && this.state.grid[gridNumber]["cell-44"] === "o") {
+          oScore += 1;
+        }
+      }
+      //Diagonals
+      if(cellName === "cell-36" || cellName === "cell-40" || cellName === "cell-44") {
+        if(this.state.grid[gridNumber]["cell-36"] === "x" && this.state.grid[gridNumber]["cell-40"] === "x" && this.state.grid[gridNumber]["cell-44"] === "x") {
+          xScore += 1;
+        } else if(this.state.grid[gridNumber]["cell-36"] === "o" && this.state.grid[gridNumber]["cell-40"] === "o" && this.state.grid[gridNumber]["cell-44"] === "o") {
+          oScore += 1;
+        }
+      }
+      if(cellName === "cell-38" || cellName === "cell-40" || cellName === "cell-42") {
+        if(this.state.grid[gridNumber]["cell-38"] === "x" && this.state.grid[gridNumber]["cell-40"] === "x" && this.state.grid[gridNumber]["cell-42"] === "x") {
+          xScore += 1;
+        } else if(this.state.grid[gridNumber]["cell-38"] === "o" && this.state.grid[gridNumber]["cell-40"] === "o" && this.state.grid[gridNumber]["cell-42"] === "o") {
+          oScore += 1;
+        }
+      }
+      this.setState({xScore: xScore});
+      this.setState({oScore: oScore});
     }
   }
 
