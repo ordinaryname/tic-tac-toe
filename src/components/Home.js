@@ -135,70 +135,70 @@ class Home extends Component {
   updateScore = (gridNumber, cellName) => {
     let xScore = this.state.xScore;
     let oScore = this.state.oScore;
-    //Container 04
+
+    let checker = (cell1, cell2, cell3) => {
+      if(cellName === cell1 || cellName === cell2 || cellName === cell3) {
+        if(this.state.grid[gridNumber][cell1] === "x" && this.state.grid[gridNumber][cell2] === "x" && this.state.grid[gridNumber][cell3] === "x") {
+          xScore += 1;
+          return true;
+        } else if(this.state.grid[gridNumber][cell1] === "o" && this.state.grid[gridNumber][cell2] === "o" && this.state.grid[gridNumber][cell3] === "o") {
+          oScore += 1;
+          return true;
+        }
+      }
+      return false;
+    };
+
     if(this.turn > 4 && this.turn <= 9) {
-      //Horizontal
-      if(cellName === "cell-36" || cellName === "cell-37" || cellName === "cell-38") {
-        if(this.state.grid[gridNumber]["cell-36"] === "x" && this.state.grid[gridNumber]["cell-37"] === "x" && this.state.grid[gridNumber]["cell-38"] === "x") {
-          xScore += 1;
-        } else if(this.state.grid[gridNumber]["cell-36"] === "o" && this.state.grid[gridNumber]["cell-37"] === "o" && this.state.grid[gridNumber]["cell-38"] === "o") {
-          oScore += 1;
-        }
-      }
-      if(cellName === "cell-39" || cellName === "cell-40" || cellName === "cell-41") {
-        if(this.state.grid[gridNumber]["cell-39"] === "x" && this.state.grid[gridNumber]["cell-40"] === "x" && this.state.grid[gridNumber]["cell-41"] === "x") {
-          xScore += 1;
-        } else if(this.state.grid[gridNumber]["cell-39"] === "o" && this.state.grid[gridNumber]["cell-40"] === "o" && this.state.grid[gridNumber]["cell-41"] === "o") {
-          oScore += 1;
-        }
-      }
-      if(cellName === "cell-42" || cellName === "cell-43" || cellName === "cell-44") {
-        if(this.state.grid[gridNumber]["cell-42"] === "x" && this.state.grid[gridNumber]["cell-43"] === "x" && this.state.grid[gridNumber]["cell-44"] === "x") {
-          xScore += 1;
-        } else if(this.state.grid[gridNumber]["cell-42"] === "o" && this.state.grid[gridNumber]["cell-43"] === "o" && this.state.grid[gridNumber]["cell-44"] === "o") {
-          oScore += 1;
-        }
-      }
-      //Vertical
-      if(cellName === "cell-36" || cellName === "cell-39" || cellName === "cell-42") {
-        if(this.state.grid[gridNumber]["cell-36"] === "x" && this.state.grid[gridNumber]["cell-39"] === "x" && this.state.grid[gridNumber]["cell-42"] === "x") {
-          xScore += 1;
-        } else if(this.state.grid[gridNumber]["cell-36"] === "o" && this.state.grid[gridNumber]["cell-39"] === "o" && this.state.grid[gridNumber]["cell-42"] === "o") {
-          oScore += 1;
-        }
-      }
-      if(cellName === "cell-37" || cellName === "cell-40" || cellName === "cell-43") {
-        if(this.state.grid[gridNumber]["cell-37"] === "x" && this.state.grid[gridNumber]["cell-40"] === "x" && this.state.grid[gridNumber]["cell-43"] === "x") {
-          xScore += 1;
-        } else if(this.state.grid[gridNumber]["cell-37"] === "o" && this.state.grid[gridNumber]["cell-40"] === "o" && this.state.grid[gridNumber]["cell-43"] === "o") {
-          oScore += 1;
-        }
-      }
-      if(cellName === "cell-38" || cellName === "cell-41" || cellName === "cell-44") {
-        if(this.state.grid[gridNumber]["cell-38"] === "x" && this.state.grid[gridNumber]["cell-41"] === "x" && this.state.grid[gridNumber]["cell-44"] === "x") {
-          xScore += 1;
-        } else if(this.state.grid[gridNumber]["cell-38"] === "o" && this.state.grid[gridNumber]["cell-41"] === "o" && this.state.grid[gridNumber]["cell-44"] === "o") {
-          oScore += 1;
-        }
-      }
-      //Diagonals
-      if(cellName === "cell-36" || cellName === "cell-40" || cellName === "cell-44") {
-        if(this.state.grid[gridNumber]["cell-36"] === "x" && this.state.grid[gridNumber]["cell-40"] === "x" && this.state.grid[gridNumber]["cell-44"] === "x") {
-          xScore += 1;
-        } else if(this.state.grid[gridNumber]["cell-36"] === "o" && this.state.grid[gridNumber]["cell-40"] === "o" && this.state.grid[gridNumber]["cell-44"] === "o") {
-          oScore += 1;
-        }
-      }
-      if(cellName === "cell-38" || cellName === "cell-40" || cellName === "cell-42") {
-        if(this.state.grid[gridNumber]["cell-38"] === "x" && this.state.grid[gridNumber]["cell-40"] === "x" && this.state.grid[gridNumber]["cell-42"] === "x") {
-          xScore += 1;
-        } else if(this.state.grid[gridNumber]["cell-38"] === "o" && this.state.grid[gridNumber]["cell-40"] === "o" && this.state.grid[gridNumber]["cell-42"] === "o") {
-          oScore += 1;
-        }
-      }
-      this.setState({xScore: xScore});
-      this.setState({oScore: oScore});
+      //Container 04
+      var array = [["cell-36", "cell-37", "cell-38"],["cell-39", "cell-40", "cell-41"],["cell-42", "cell-43", "cell-44"],["cell-36", "cell-39", "cell-42"],["cell-37", "cell-40", "cell-43"],["cell-38", "cell-41", "cell-44"],["cell-36", "cell-40", "cell-44"],["cell-38", "cell-40", "cell-42"]];
+      array.forEach(function(element){
+        checker(element[0], element[1], element[2]);
+      });
+    } else if(this.turn > 9 && this.turn <= 18) {
+      //Container 05
+      var array = [["cell-45", "cell-46", "cell-47"],["cell-48", "cell-49", "cell-50"],["cell-51", "cell-52", "cell-53"],["cell-45", "cell-48", "cell-51"],["cell-46", "cell-49", "cell-52"],["cell-47", "cell-50", "cell-53"],["cell-45", "cell-49", "cell-53"],["cell-47", "cell-49", "cell-51"]];
+      array.forEach(function(element){
+        checker(element[0], element[1], element[2]);
+      });
+    } else if(this.turn > 4 && this.turn <= 9) {
+      var array = [["cell-36", "cell-37", "cell-38"],["cell-39", "cell-40", "cell-41"],["cell-42", "cell-43", "cell-44"],["cell-36", "cell-39", "cell-42"],["cell-37", "cell-40", "cell-43"],["cell-38", "cell-41", "cell-44"],["cell-36", "cell-40", "cell-44"],["cell-38", "cell-40", "cell-42"]];
+      array.forEach(function(element){
+        checker(element[0], element[1], element[2]);
+      });
+    } else if(this.turn > 4 && this.turn <= 9) {
+      var array = [["cell-36", "cell-37", "cell-38"],["cell-39", "cell-40", "cell-41"],["cell-42", "cell-43", "cell-44"],["cell-36", "cell-39", "cell-42"],["cell-37", "cell-40", "cell-43"],["cell-38", "cell-41", "cell-44"],["cell-36", "cell-40", "cell-44"],["cell-38", "cell-40", "cell-42"]];
+      array.forEach(function(element){
+        checker(element[0], element[1], element[2]);
+      });
+    } else if(this.turn > 4 && this.turn <= 9) {
+      var array = [["cell-36", "cell-37", "cell-38"],["cell-39", "cell-40", "cell-41"],["cell-42", "cell-43", "cell-44"],["cell-36", "cell-39", "cell-42"],["cell-37", "cell-40", "cell-43"],["cell-38", "cell-41", "cell-44"],["cell-36", "cell-40", "cell-44"],["cell-38", "cell-40", "cell-42"]];
+      array.forEach(function(element){
+        checker(element[0], element[1], element[2]);
+      });
+    } else if(this.turn > 4 && this.turn <= 9) {
+      var array = [["cell-36", "cell-37", "cell-38"],["cell-39", "cell-40", "cell-41"],["cell-42", "cell-43", "cell-44"],["cell-36", "cell-39", "cell-42"],["cell-37", "cell-40", "cell-43"],["cell-38", "cell-41", "cell-44"],["cell-36", "cell-40", "cell-44"],["cell-38", "cell-40", "cell-42"]];
+      array.forEach(function(element){
+        checker(element[0], element[1], element[2]);
+      });
+    } else if(this.turn > 4 && this.turn <= 9) {
+      var array = [["cell-36", "cell-37", "cell-38"],["cell-39", "cell-40", "cell-41"],["cell-42", "cell-43", "cell-44"],["cell-36", "cell-39", "cell-42"],["cell-37", "cell-40", "cell-43"],["cell-38", "cell-41", "cell-44"],["cell-36", "cell-40", "cell-44"],["cell-38", "cell-40", "cell-42"]];
+      array.forEach(function(element){
+        checker(element[0], element[1], element[2]);
+      });
+    } else if(this.turn > 4 && this.turn <= 9) {
+      var array = [["cell-36", "cell-37", "cell-38"],["cell-39", "cell-40", "cell-41"],["cell-42", "cell-43", "cell-44"],["cell-36", "cell-39", "cell-42"],["cell-37", "cell-40", "cell-43"],["cell-38", "cell-41", "cell-44"],["cell-36", "cell-40", "cell-44"],["cell-38", "cell-40", "cell-42"]];
+      array.forEach(function(element){
+        checker(element[0], element[1], element[2]);
+      });
+    } else if(this.turn > 4 && this.turn <= 9) {
+      var array = [["cell-36", "cell-37", "cell-38"],["cell-39", "cell-40", "cell-41"],["cell-42", "cell-43", "cell-44"],["cell-36", "cell-39", "cell-42"],["cell-37", "cell-40", "cell-43"],["cell-38", "cell-41", "cell-44"],["cell-36", "cell-40", "cell-44"],["cell-38", "cell-40", "cell-42"]];
+      array.forEach(function(element){
+        checker(element[0], element[1], element[2]);
+      });
     }
+    this.setState({xScore: xScore});
+    this.setState({oScore: oScore});
   }
 
   render() {
