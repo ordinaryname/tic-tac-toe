@@ -157,42 +157,49 @@ class Home extends Component {
       });
     } else if(this.turn > 9 && this.turn <= 18) {
       //Container 05
-      var array = [["cell-45", "cell-46", "cell-47"],["cell-48", "cell-49", "cell-50"],["cell-51", "cell-52", "cell-53"],["cell-45", "cell-48", "cell-51"],["cell-46", "cell-49", "cell-52"],["cell-47", "cell-50", "cell-53"],["cell-45", "cell-49", "cell-53"],["cell-47", "cell-49", "cell-51"]];
+      array = [["cell-45", "cell-46", "cell-47"],["cell-48", "cell-49", "cell-50"],["cell-51", "cell-52", "cell-53"],["cell-45", "cell-48", "cell-51"],["cell-46", "cell-49", "cell-52"],["cell-47", "cell-50", "cell-53"],["cell-45", "cell-49", "cell-53"],["cell-47", "cell-49", "cell-51"],["cell-46", "cell-45", "cell-38"],["cell-49", "cell-48", "cell-41"],["cell-52", "cell-51", "cell-44"],["cell-45", "cell-38", "cell-37"],["cell-48", "cell-41", "cell-40"],["cell-51", "cell-44", "cell-43"],["cell-52", "cell-48", "cell-38"],["cell-51", "cell-41", "cell-37"],["cell-45", "cell-41", "cell-43"]];
       array.forEach(function(element){
         checker(element[0], element[1], element[2]);
       });
-    } else if(this.turn > 4 && this.turn <= 9) {
-      var array = [["cell-36", "cell-37", "cell-38"],["cell-39", "cell-40", "cell-41"],["cell-42", "cell-43", "cell-44"],["cell-36", "cell-39", "cell-42"],["cell-37", "cell-40", "cell-43"],["cell-38", "cell-41", "cell-44"],["cell-36", "cell-40", "cell-44"],["cell-38", "cell-40", "cell-42"]];
+    } else if(this.turn > 18 && this.turn <= 27) {
+      //Container 02
+      array = [["cell-18", "cell-19", "cell-20"],["cell-21", "cell-22", "cell-23"],["cell-24", "cell-25", "cell-26"],["cell-18", "cell-21", "cell-24"],["cell-19", "cell-22", "cell-25"],["cell-20", "cell-23", "cell-26"],["cell-18", "cell-22", "cell-26"],["cell-20", "cell-22", "cell-24"]];
       array.forEach(function(element){
         checker(element[0], element[1], element[2]);
       });
-    } else if(this.turn > 4 && this.turn <= 9) {
-      var array = [["cell-36", "cell-37", "cell-38"],["cell-39", "cell-40", "cell-41"],["cell-42", "cell-43", "cell-44"],["cell-36", "cell-39", "cell-42"],["cell-37", "cell-40", "cell-43"],["cell-38", "cell-41", "cell-44"],["cell-36", "cell-40", "cell-44"],["cell-38", "cell-40", "cell-42"]];
+    } else if(this.turn > 27 && this.turn <= 36) {
+      //Container 01
+      array = [["cell-09", "cell-10", "cell-11"],["cell-12", "cell-13", "cell-14"],["cell-15", "cell-16", "cell-17"],["cell-09", "cell-12", "cell-15"],["cell-10", "cell-13", "cell-16"],["cell-11", "cell-14", "cell-17"],["cell-09", "cell-13", "cell-17"],["cell-11", "cell-13", "cell-15"]];
       array.forEach(function(element){
         checker(element[0], element[1], element[2]);
       });
-    } else if(this.turn > 4 && this.turn <= 9) {
-      var array = [["cell-36", "cell-37", "cell-38"],["cell-39", "cell-40", "cell-41"],["cell-42", "cell-43", "cell-44"],["cell-36", "cell-39", "cell-42"],["cell-37", "cell-40", "cell-43"],["cell-38", "cell-41", "cell-44"],["cell-36", "cell-40", "cell-44"],["cell-38", "cell-40", "cell-42"]];
+    } else if(this.turn > 36 && this.turn <= 45) {
+      //Container 00
+      array = [["cell-00", "cell-01", "cell-02"],["cell-03", "cell-04", "cell-05"],["cell-06", "cell-07", "cell-08"],["cell-00", "cell-03", "cell-06"],["cell-01", "cell-04", "cell-07"],["cell-02", "cell-05", "cell-08"],["cell-00", "cell-04", "cell-08"],["cell-02", "cell-04", "cell-06"]];
       array.forEach(function(element){
         checker(element[0], element[1], element[2]);
       });
-    } else if(this.turn > 4 && this.turn <= 9) {
-      var array = [["cell-36", "cell-37", "cell-38"],["cell-39", "cell-40", "cell-41"],["cell-42", "cell-43", "cell-44"],["cell-36", "cell-39", "cell-42"],["cell-37", "cell-40", "cell-43"],["cell-38", "cell-41", "cell-44"],["cell-36", "cell-40", "cell-44"],["cell-38", "cell-40", "cell-42"]];
+    } else if(this.turn > 45 && this.turn <= 54) {
+      //Container 03
+      array = [["cell-27", "cell-28", "cell-29"],["cell-30", "cell-31", "cell-32"],["cell-33", "cell-34", "cell-35"],["cell-27", "cell-30", "cell-33"],["cell-28", "cell-31", "cell-34"],["cell-29", "cell-32", "cell-35"],["cell-27", "cell-31", "cell-35"],["cell-29", "cell-31", "cell-33"]];
       array.forEach(function(element){
         checker(element[0], element[1], element[2]);
       });
-    } else if(this.turn > 4 && this.turn <= 9) {
-      var array = [["cell-36", "cell-37", "cell-38"],["cell-39", "cell-40", "cell-41"],["cell-42", "cell-43", "cell-44"],["cell-36", "cell-39", "cell-42"],["cell-37", "cell-40", "cell-43"],["cell-38", "cell-41", "cell-44"],["cell-36", "cell-40", "cell-44"],["cell-38", "cell-40", "cell-42"]];
+    } else if(this.turn > 54 && this.turn <= 63) {
+      //Container 06
+      array = [["cell-54", "cell-55", "cell-56"],["cell-57", "cell-58", "cell-59"],["cell-60", "cell-61", "cell-62"],["cell-54", "cell-57", "cell-60"],["cell-55", "cell-58", "cell-61"],["cell-56", "cell-59", "cell-62"],["cell-54", "cell-58", "cell-62"],["cell-56", "cell-58", "cell-60"]];
       array.forEach(function(element){
         checker(element[0], element[1], element[2]);
       });
-    } else if(this.turn > 4 && this.turn <= 9) {
-      var array = [["cell-36", "cell-37", "cell-38"],["cell-39", "cell-40", "cell-41"],["cell-42", "cell-43", "cell-44"],["cell-36", "cell-39", "cell-42"],["cell-37", "cell-40", "cell-43"],["cell-38", "cell-41", "cell-44"],["cell-36", "cell-40", "cell-44"],["cell-38", "cell-40", "cell-42"]];
+    } else if(this.turn > 63 && this.turn <= 72) {
+      //Container 07
+      array = [["cell-63", "cell-64", "cell-65"],["cell-66", "cell-67", "cell-68"],["cell-69", "cell-70", "cell-71"],["cell-63", "cell-66", "cell-69"],["cell-64", "cell-67", "cell-70"],["cell-65", "cell-68", "cell-71"],["cell-63", "cell-67", "cell-71"],["cell-65", "cell-67", "cell-69"]];
       array.forEach(function(element){
         checker(element[0], element[1], element[2]);
       });
-    } else if(this.turn > 4 && this.turn <= 9) {
-      var array = [["cell-36", "cell-37", "cell-38"],["cell-39", "cell-40", "cell-41"],["cell-42", "cell-43", "cell-44"],["cell-36", "cell-39", "cell-42"],["cell-37", "cell-40", "cell-43"],["cell-38", "cell-41", "cell-44"],["cell-36", "cell-40", "cell-44"],["cell-38", "cell-40", "cell-42"]];
+    } else if(this.turn > 72 && this.turn <= 81) {
+      //Container 08
+      array = [["cell-72", "cell-73", "cell-74"],["cell-75", "cell-76", "cell-77"],["cell-78", "cell-79", "cell-80"],["cell-72", "cell-75", "cell-78"],["cell-73", "cell-76", "cell-79"],["cell-74", "cell-77", "cell-80"],["cell-72", "cell-76", "cell-80"],["cell-74", "cell-76", "cell-78"]];
       array.forEach(function(element){
         checker(element[0], element[1], element[2]);
       });
