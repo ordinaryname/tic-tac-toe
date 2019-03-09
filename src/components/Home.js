@@ -163,13 +163,13 @@ class Home extends Component {
       });
     } else if(this.turn > 18 && this.turn <= 27) {
       //Container 02
-      array = [["cell-18", "cell-19", "cell-20"],["cell-21", "cell-22", "cell-23"],["cell-24", "cell-25", "cell-26"],["cell-18", "cell-21", "cell-24"],["cell-19", "cell-22", "cell-25"],["cell-20", "cell-23", "cell-26"],["cell-18", "cell-22", "cell-26"],["cell-20", "cell-22", "cell-24"]];
+      array = [["cell-18", "cell-19", "cell-20"],["cell-21", "cell-22", "cell-23"],["cell-24", "cell-25", "cell-26"],["cell-18", "cell-21", "cell-24"],["cell-19", "cell-22", "cell-25"],["cell-20", "cell-23", "cell-26"],["cell-18", "cell-22", "cell-26"],["cell-20", "cell-22", "cell-24"],["cell-21", "cell-24", "cell-45"],["cell-22", "cell-25", "cell-46"],["cell-23", "cell-26", "cell-47"],["cell-24", "cell-45", "cell-48"],["cell-25", "cell-46", "cell-49"],["cell-26", "cell-47", "cell-50"],["cell-21", "cell-25", "cell-47"],["cell-24", "cell-46", "cell-50"],["cell-23", "cell-25", "cell-45"],["cell-26", "cell-46", "cell-48"],["cell-25", "cell-45", "cell-41"],["cell-23", "cell-25", "cell-45"],["cell-24", "cell-38", "cell-40"],["cell-22", "cell-24", "cell-38"]];
       array.forEach(function(element){
         checker(element[0], element[1], element[2]);
       });
     } else if(this.turn > 27 && this.turn <= 36) {
       //Container 01
-      array = [["cell-09", "cell-10", "cell-11"],["cell-12", "cell-13", "cell-14"],["cell-15", "cell-16", "cell-17"],["cell-09", "cell-12", "cell-15"],["cell-10", "cell-13", "cell-16"],["cell-11", "cell-14", "cell-17"],["cell-09", "cell-13", "cell-17"],["cell-11", "cell-13", "cell-15"]];
+      array = [["cell-09", "cell-10", "cell-11"],["cell-12", "cell-13", "cell-14"],["cell-15", "cell-16", "cell-17"],["cell-09", "cell-12", "cell-15"],["cell-10", "cell-13", "cell-16"],["cell-11", "cell-14", "cell-17"],["cell-09", "cell-13", "cell-17"],["cell-11", "cell-13", "cell-15"],["cell-12", "cell-15", "cell-36"],["cell-13", "cell-16", "cell-37"],["cell-14", "cell-17", "cell-38"],["cell-15", "cell-36", "cell-39"],["cell-16", "cell-37", "cell-40"],["cell-17", "cell-38", "cell-41"],["cell-12", "cell-16", "cell-38"],["cell-14", "cell-16", "cell-36"],["cell-15", "cell-37", "cell-41"],["cell-17", "cell-37", "cell-39"],["cell-13", "cell-17", "cell-45"],["cell-17", "cell-45", "cell-49"],["cell-10", "cell-11", "cell-18"],["cell-13", "cell-14", "cell-21"],["cell-16", "cell-17", "cell-24"],["cell-11", "cell-18", "cell-19"],["cell-14", "cell-21", "cell-22"],["cell-17", "cell-24", "cell-25"],["cell-11", "cell-21", "cell-25"],["cell-10", "cell-14", "cell-24"],["cell-14", "cell-24", "cell-46"],["cell-12", "cell-16", "cell-38"],["cell-16", "cell-38", "cell-48"],["cell-15", "cell-37", "cell-41"],["cell-16", "cell-14", "cell-18"],["cell-17", "cell-21", "cell-19"],["cell-17", "cell-21", "cell-37"]];
       array.forEach(function(element){
         checker(element[0], element[1], element[2]);
       });
