@@ -37,16 +37,34 @@ class Home extends Component {
   componentDidMount() {
   }
 
-  anime = () => {
+  anime = (box1, box2, box3) => {
     anime({
-      targets: this.square,
-      translateY: {value: 500},
-      duration: 3000
+      targets: box1,
+      fill: [
+        {value: '#cc0000', duration: 3000, delay: 250},
+        {value: '#000000', duration: 3000}
+      ]
     });
     anime({
-      targets: this.circle,
-      translateY: {value: 500},
-      duration: 3000,
+      targets: box2,
+      fill: [
+        {value: '#cc0000', duration: 3000, delay: 500},
+        {value: '#000000', duration: 3000}
+      ]
+    });
+    anime({
+      targets: box3,
+      fill: [
+        {value: '#cc0000', duration: 3000, delay: 750},
+        {value: '#000000', duration: 3000}
+      ]
+    });
+    anime({
+      targets: '.score',
+      color: [
+        {value: '#cc0000', duration: 1500, delay: 250},
+        {value: '#000000', duration: 1500}
+      ]
     });
   }
 
@@ -140,9 +158,13 @@ class Home extends Component {
       if(cellName === cell1 || cellName === cell2 || cellName === cell3) {
         if(this.state.grid[gridNumber][cell1] === "x" && this.state.grid[gridNumber][cell2] === "x" && this.state.grid[gridNumber][cell3] === "x") {
           xScore += 1;
+          this.anime('.' + cell1 + ' svg', '.' + cell2 + ' svg', '.' + cell3 + ' svg');
+          console.log('.' + cell1 + ' svg path', '.' + cell2 + ' svg path', '.' + cell3 + ' svg path');
           return true;
         } else if(this.state.grid[gridNumber][cell1] === "o" && this.state.grid[gridNumber][cell2] === "o" && this.state.grid[gridNumber][cell3] === "o") {
           oScore += 1;
+          this.anime('.' + cell1 + ' svg', '.' + cell2 + ' svg', '.' + cell3 + ' svg');
+          console.log('.' + cell1 + ' svg path', '.' + cell2 + ' svg path', '.' + cell3 + ' svg path');
           return true;
         }
       }
@@ -169,37 +191,37 @@ class Home extends Component {
       });
     } else if(this.turn > 27 && this.turn <= 36) {
       //Container 01
-      array = [["cell-09", "cell-10", "cell-11"],["cell-12", "cell-13", "cell-14"],["cell-15", "cell-16", "cell-17"],["cell-09", "cell-12", "cell-15"],["cell-10", "cell-13", "cell-16"],["cell-11", "cell-14", "cell-17"],["cell-09", "cell-13", "cell-17"],["cell-11", "cell-13", "cell-15"],["cell-12", "cell-15", "cell-36"],["cell-13", "cell-16", "cell-37"],["cell-14", "cell-17", "cell-38"],["cell-15", "cell-36", "cell-39"],["cell-16", "cell-37", "cell-40"],["cell-17", "cell-38", "cell-41"],["cell-12", "cell-16", "cell-38"],["cell-14", "cell-16", "cell-36"],["cell-15", "cell-37", "cell-41"],["cell-17", "cell-37", "cell-39"],["cell-13", "cell-17", "cell-45"],["cell-17", "cell-45", "cell-49"],["cell-10", "cell-11", "cell-18"],["cell-13", "cell-14", "cell-21"],["cell-16", "cell-17", "cell-24"],["cell-11", "cell-18", "cell-19"],["cell-14", "cell-21", "cell-22"],["cell-17", "cell-24", "cell-25"],["cell-11", "cell-21", "cell-25"],["cell-10", "cell-14", "cell-24"],["cell-14", "cell-24", "cell-46"],["cell-12", "cell-16", "cell-38"],["cell-16", "cell-38", "cell-48"],["cell-15", "cell-37", "cell-41"],["cell-16", "cell-14", "cell-18"],["cell-17", "cell-21", "cell-19"],["cell-17", "cell-21", "cell-37"]];
+      array = [["cell-09", "cell-10", "cell-11"],["cell-12", "cell-13", "cell-14"],["cell-15", "cell-16", "cell-17"],["cell-09", "cell-12", "cell-15"],["cell-10", "cell-13", "cell-16"],["cell-11", "cell-14", "cell-17"],["cell-09", "cell-13", "cell-17"],["cell-11", "cell-13", "cell-15"],["cell-12", "cell-15", "cell-36"],["cell-13", "cell-16", "cell-37"],["cell-14", "cell-17", "cell-38"],["cell-15", "cell-36", "cell-39"],["cell-16", "cell-37", "cell-40"],["cell-17", "cell-38", "cell-41"],["cell-12", "cell-16", "cell-38"],["cell-14", "cell-16", "cell-36"],["cell-15", "cell-37", "cell-41"],["cell-17", "cell-37", "cell-39"],["cell-13", "cell-17", "cell-45"],["cell-17", "cell-45", "cell-49"],["cell-10", "cell-11", "cell-18"],["cell-13", "cell-14", "cell-21"],["cell-16", "cell-17", "cell-24"],["cell-11", "cell-18", "cell-19"],["cell-14", "cell-21", "cell-22"],["cell-17", "cell-24", "cell-25"],["cell-11", "cell-21", "cell-25"],["cell-10", "cell-14", "cell-24"],["cell-14", "cell-24", "cell-46"],["cell-16", "cell-38", "cell-48"],["cell-16", "cell-14", "cell-18"],["cell-17", "cell-21", "cell-19"],["cell-17", "cell-21", "cell-37"]];
       array.forEach(function(element){
         checker(element[0], element[1], element[2]);
       });
     } else if(this.turn > 36 && this.turn <= 45) {
       //Container 00
-      array = [["cell-00", "cell-01", "cell-02"],["cell-03", "cell-04", "cell-05"],["cell-06", "cell-07", "cell-08"],["cell-00", "cell-03", "cell-06"],["cell-01", "cell-04", "cell-07"],["cell-02", "cell-05", "cell-08"],["cell-00", "cell-04", "cell-08"],["cell-02", "cell-04", "cell-06"]];
+      array = [["cell-00", "cell-01", "cell-02"],["cell-03", "cell-04", "cell-05"],["cell-06", "cell-07", "cell-08"],["cell-00", "cell-03", "cell-06"],["cell-01", "cell-04", "cell-07"],["cell-02", "cell-05", "cell-08"],["cell-00", "cell-04", "cell-08"],["cell-02", "cell-04", "cell-06"],["cell-01", "cell-02", "cell-09"],["cell-04", "cell-05", "cell-12"],["cell-07", "cell-08", "cell-15"],["cell-02", "cell-09", "cell-10"],["cell-05", "cell-12", "cell-13"],["cell-08", "cell-15", "cell-16"],["cell-01", "cell-05", "cell-15"],["cell-02", "cell-12", "cell-16"],["cell-05", "cell-15", "cell-37"],["cell-04", "cell-08", "cell-36"],["cell-08", "cell-36", "cell-40"],["cell-07", "cell-05", "cell-09"],["cell-08", "cell-12", "cell-10"]];
       array.forEach(function(element){
         checker(element[0], element[1], element[2]);
       });
     } else if(this.turn > 45 && this.turn <= 54) {
       //Container 03
-      array = [["cell-27", "cell-28", "cell-29"],["cell-30", "cell-31", "cell-32"],["cell-33", "cell-34", "cell-35"],["cell-27", "cell-30", "cell-33"],["cell-28", "cell-31", "cell-34"],["cell-29", "cell-32", "cell-35"],["cell-27", "cell-31", "cell-35"],["cell-29", "cell-31", "cell-33"]];
+      array = [["cell-27", "cell-28", "cell-29"],["cell-30", "cell-31", "cell-32"],["cell-33", "cell-34", "cell-35"],["cell-27", "cell-30", "cell-33"],["cell-28", "cell-31", "cell-34"],["cell-29", "cell-32", "cell-35"],["cell-27", "cell-31", "cell-35"],["cell-29", "cell-31", "cell-33"],["cell-27", "cell-06", "cell-03"],["cell-28", "cell-07", "cell-04"],["cell-29", "cell-08", "cell-05"],["cell-30", "cell-27", "cell-06"],["cell-31", "cell-28", "cell-07"],["cell-32", "cell-29", "cell-08"],["cell-32", "cell-28", "cell-06"],["cell-29", "cell-07", "cell-03"],["cell-27", "cell-07", "cell-05"],["cell-28", "cell-08", "cell-12"],["cell-29", "cell-15", "cell-13"],["cell-30", "cell-28", "cell-08"],["cell-31", "cell-29", "cell-15"],["cell-32", "cell-36", "cell-16"],["cell-34", "cell-32", "cell-36"],["cell-35", "cell-39", "cell-37"],["cell-29", "cell-07", "cell-39"],["cell-29", "cell-39", "cell-43"],["cell-28", "cell-32", "cell-42"],["cell-28", "cell-29", "cell-36"],["cell-31", "cell-32", "cell-39"],["cell-34", "cell-35", "cell-42"],["cell-29", "cell-36", "cell-37"],["cell-32", "cell-39", "cell-40"],["cell-35", "cell-42", "cell-43"]];
       array.forEach(function(element){
         checker(element[0], element[1], element[2]);
       });
     } else if(this.turn > 54 && this.turn <= 63) {
       //Container 06
-      array = [["cell-54", "cell-55", "cell-56"],["cell-57", "cell-58", "cell-59"],["cell-60", "cell-61", "cell-62"],["cell-54", "cell-57", "cell-60"],["cell-55", "cell-58", "cell-61"],["cell-56", "cell-59", "cell-62"],["cell-54", "cell-58", "cell-62"],["cell-56", "cell-58", "cell-60"]];
+      array = [["cell-54", "cell-55", "cell-56"],["cell-57", "cell-58", "cell-59"],["cell-60", "cell-61", "cell-62"],["cell-54", "cell-57", "cell-60"],["cell-55", "cell-58", "cell-61"],["cell-56", "cell-59", "cell-62"],["cell-54", "cell-58", "cell-62"],["cell-56", "cell-58", "cell-60"],["cell-57", "cell-54", "cell-33"],["cell-58", "cell-55", "cell-34"],["cell-59", "cell-56", "cell-35"],["cell-54", "cell-33", "cell-30"],["cell-55", "cell-34", "cell-31"],["cell-56", "cell-35", "cell-32"],["cell-54", "cell-34", "cell-32"],["cell-57", "cell-55", "cell-35"],["cell-55", "cell-35", "cell-39"],["cell-58", "cell-56", "cell-42"],["cell-56", "cell-42", "cell-40"],["cell-59", "cell-55", "cell-33"],["cell-56", "cell-34", "cell-30"]];
       array.forEach(function(element){
         checker(element[0], element[1], element[2]);
       });
     } else if(this.turn > 63 && this.turn <= 72) {
       //Container 07
-      array = [["cell-63", "cell-64", "cell-65"],["cell-66", "cell-67", "cell-68"],["cell-69", "cell-70", "cell-71"],["cell-63", "cell-66", "cell-69"],["cell-64", "cell-67", "cell-70"],["cell-65", "cell-68", "cell-71"],["cell-63", "cell-67", "cell-71"],["cell-65", "cell-67", "cell-69"]];
+      array = [["cell-63", "cell-64", "cell-65"],["cell-66", "cell-67", "cell-68"],["cell-69", "cell-70", "cell-71"],["cell-63", "cell-66", "cell-69"],["cell-64", "cell-67", "cell-70"],["cell-65", "cell-68", "cell-71"],["cell-63", "cell-67", "cell-71"],["cell-65", "cell-67", "cell-69"],["cell-66", "cell-63", "cell-42"],["cell-67", "cell-64", "cell-43"],["cell-68", "cell-65", "cell-44"],["cell-63", "cell-42", "cell-39"],["cell-64", "cell-43", "cell-40"],["cell-65", "cell-44", "cell-41"],["cell-64", "cell-63", "cell-56"],["cell-67", "cell-66", "cell-59"],["cell-70", "cell-69", "cell-62"],["cell-63", "cell-56", "cell-55"],["cell-66", "cell-59", "cell-58"],["cell-69", "cell-62", "cell-61"],["cell-67", "cell-63", "cell-35"],["cell-63", "cell-35", "cell-31"],["cell-67", "cell-65", "cell-51"],["cell-65", "cell-51", "cell-49"],["cell-63", "cell-59", "cell-61"],["cell-63", "cell-43", "cell-59"],["cell-63", "cell-43", "cell-41"],["cell-68", "cell-64", "cell-42"],["cell-64", "cell-42", "cell-32"],["cell-64", "cell-44", "cell-48"],["cell-64", "cell-66", "cell-62"],["cell-65", "cell-43", "cell-39"],["cell-69", "cell-59", "cell-55"],["cell-66", "cell-56", "cell-34"],["cell-70", "cell-66", "cell-56"],["cell-68", "cell-64", "cell-42"]];
       array.forEach(function(element){
         checker(element[0], element[1], element[2]);
       });
     } else if(this.turn > 72 && this.turn <= 81) {
       //Container 08
-      array = [["cell-72", "cell-73", "cell-74"],["cell-75", "cell-76", "cell-77"],["cell-78", "cell-79", "cell-80"],["cell-72", "cell-75", "cell-78"],["cell-73", "cell-76", "cell-79"],["cell-74", "cell-77", "cell-80"],["cell-72", "cell-76", "cell-80"],["cell-74", "cell-76", "cell-78"]];
+      array = [["cell-72", "cell-73", "cell-74"],["cell-75", "cell-76", "cell-77"],["cell-78", "cell-79", "cell-80"],["cell-72", "cell-75", "cell-78"],["cell-73", "cell-76", "cell-79"],["cell-74", "cell-77", "cell-80"],["cell-72", "cell-76", "cell-80"],["cell-74", "cell-76", "cell-78"],["cell-75", "cell-72", "cell-51"],["cell-76", "cell-73", "cell-52"],["cell-77", "cell-74", "cell-53"],["cell-72", "cell-51", "cell-48"],["cell-73", "cell-52", "cell-49"],["cell-74", "cell-53", "cell-50"],["cell-73", "cell-72", "cell-65"],["cell-76", "cell-75", "cell-68"],["cell-79", "cell-78", "cell-71"],["cell-72", "cell-65", "cell-64"],["cell-75", "cell-68", "cell-67"],["cell-78", "cell-71", "cell-70"],["cell-72", "cell-68", "cell-70"],["cell-72", "cell-52", "cell-68"],["cell-72", "cell-52", "cell-50"],["cell-72", "cell-44", "cell-40"],["cell-76", "cell-72", "cell-44"],["cell-73", "cell-75", "cell-71"],["cell-75", "cell-73", "cell-53"],["cell-78", "cell-68", "cell-64"],["cell-75", "cell-65", "cell-43"],["cell-79", "cell-75", "cell-65"],["cell-73", "cell-51", "cell-41"],["cell-77", "cell-73", "cell-51"],["cell-74", "cell-52", "cell-48"]];
       array.forEach(function(element){
         checker(element[0], element[1], element[2]);
       });
