@@ -44,6 +44,57 @@
   color: #555555;
   font-size: 2rem;
 }
+.gameOverPanel{
+  position: absolute;
+  top: 35%;
+  left: 30%;
+  width: 40%;
+  padding: 4em 0em;
+  text-align: center;
+  background-color: #eeeeee;
+  border: 2px solid #dddddd;
+  display: none;
+}
+.gameOverTitle{
+  margin: 20px;
+  color: #555555;
+  font-size: 1.6em;
+}
+.gameOverText{
+  margin: 20px;
+  color: #555555;
+  font-size: 1em;
+  line-height: 2em;
+}
+.playAgain{
+  width: 30%;
+  margin: 10px;
+  padding: 1em;
+  color: #555555;
+  font-size: 1em;
+  background-color: #dddddd;
+}
+.playAgain:hover{
+  background-color: #ddddcc;
+  cursor: pointer;
+}
+.challengeFriends{
+  width: 30%;
+  margin: 10px;
+  padding: 1em;
+  color: #555555;
+  font-size: 1em;
+  background-color: #dddddd;
+}
+.challengeFriends:hover{
+  background-color: #ddddcc;
+  cursor: pointer;
+}
+.igLogo{
+  width: 1em;
+  height: 1em;
+  fill: #555555;
+}
 .container{
   width: 1050px;
   margin-left: auto;
