@@ -2,6 +2,9 @@
   margin: 0;
   padding: 0;
 }
+body{
+  background-color: #f8f8f8;
+}
 .home{
   width: 100%;
 }
@@ -10,17 +13,16 @@
   text-align: center;
 }
 .togglePlayerBtn{
-  width: 10%;
+  width: 20%;
   margin: 0 auto;
   padding: 1rem;
-  color: #ffffff;
+  background-color: #dddddd;
+  color: #555555;
   font-size: 1.4rem;
 }
-.x{
-  background-color: #0000cc;
-}
-.o{
-  background-color: #00aa00;
+.togglePlayerBtn:hover{
+  background-color: #ddddcc;
+  cursor: pointer;
 }
 .scoreboard{
   padding: 0;
@@ -101,7 +103,8 @@
   margin-right: auto;
   display: grid;
   justify-content: center;
-  border: 2px solid #555555;
+  border: 2px solid #e8e8e8;
+  background-color: #f5f5f5;
   grid-template-columns: repeat(3, 330px);
   grid-template-rows: repeat(3, 330px);
   grid-gap: 30px;
@@ -171,6 +174,9 @@
 }
 .active{
   display: grid;
+}
+.displayBlock{
+  display: block;
 }
 .errorMsg{
   margin: 0;
