@@ -8,6 +8,101 @@ body{
 .home{
   width: 100%;
 }
+.header{
+  width: 100%;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  display: inline-block;
+  background-color: #efefef;
+}
+.homeButton{
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+  margin-left: 15%;
+  float: left;
+  font-size: 20px;
+  font-weight: bold;
+  color: #555555;
+  background-color: #efefef;
+  border: none;
+  display: inline-block;
+  text-decoration: none;
+}
+.homeButton:hover{
+  color: #055055;
+}
+.menu{
+  margin-right: 15%;
+  float: right;
+  display: inline-block;
+  float: right;
+  list-style-type: none;
+}
+.menuItem{
+  margin-right: 0.5rem;
+  padding: 3px;
+  float: right;
+}
+.accountIcon{
+  width: 2.5rem;
+  height: 2.5rem;
+  fill: #555555;
+}
+.accountIcon:hover{
+  fill: #0000cc;
+}
+.accountMenu{
+  max-height: 250px;
+  position: absolute;
+  top: 4rem;
+  right: calc(15% + 0.7rem);
+  display: block;
+  width: 150px;
+  z-index: 1;
+}
+.userButton{
+  width: 100%;
+  font-size: 12px;
+  padding: 8px;
+  background-color: #efefef;
+  color: #555555;
+  border: none;
+  text-decoration: none;
+}
+.userButton:hover{
+  background-color: #aaaaaa;
+  color: white;
+}
+.inAppPurchases{
+  width: 2.5rem;
+  height: 2.5rem;
+  fill: #555555;
+}
+.inAppPurchases:hover{
+  fill: #0000cc;
+}
+.shopMenu{
+  max-height: 250px;
+  position: absolute;
+  top: 4rem;
+  right: calc(15% - 2.75rem);
+  display: block;
+  width: 150px;
+  z-index: 1;
+}
+.shopButton{
+  width: 100%;
+  font-size: 12px;
+  padding: 8px;
+  background-color: #efefef;
+  color: #555555;
+  border: none;
+  text-decoration: none;
+}
+.shopButton:hover{
+  background-color: #aaaaaa;
+  color: white;
+}
 .togglePlayer{
   margin: 0px 0px 15px 0px;
   text-align: center;

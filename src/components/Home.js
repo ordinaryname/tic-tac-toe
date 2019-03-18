@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from './Header';
 import anime from 'animejs';
 
 class Home extends Component {
@@ -6,6 +7,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: [],
       player: "x",
       playersTurn: true,
       errorMsg: "",
@@ -326,6 +328,7 @@ class Home extends Component {
   render() {
     return(
       <div className="Home">
+        <Header />
         <div className="scoreboard">
           <h1 className="score">X : {this.xScore} | O : {this.oScore}</h1>
           <h1 className="turn">Turn : {this.turn}</h1>
