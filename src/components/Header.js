@@ -59,7 +59,7 @@ class Header extends Component {
           <div className="accountMenu" ref={(element) => {this.accountMenu = element;}}>
             <button className="userButton">Pick A Username</button>
             <Link to="/user"><button className="userButton">Log In</button></Link>
-            <button className="userButton">Challenge Friends</button>
+            <Link to="/challenge"><button className="userButton">Challenge Friends</button></Link>
           </div>
         ):(null)}
         {this.state.showShopMenu?(
