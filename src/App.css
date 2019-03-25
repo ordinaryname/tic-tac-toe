@@ -8,6 +8,9 @@ body{
 .home{
   width: 100%;
 }
+
+/*Header*/
+
 .header{
   width: 100%;
   padding-top: 8px;
@@ -103,6 +106,9 @@ body{
   background-color: #aaaaaa;
   color: white;
 }
+
+/*Scoreboard*/
+
 .togglePlayer{
   margin: 0px 0px 15px 0px;
   text-align: center;
@@ -141,6 +147,9 @@ body{
   color: #555555;
   font-size: 2rem;
 }
+
+/*Game Over Panel*/
+
 .gameOverPanel{
   position: absolute;
   top: 35%;
@@ -192,6 +201,9 @@ body{
   height: 1em;
   fill: #555555;
 }
+
+/*Tic-Tac-Toe Grid*/
+
 .container{
   width: 1050px;
   margin-left: auto;
@@ -340,13 +352,60 @@ body{
   justify-self: center;
   align-self: center;
 }
+
+/*ChallengeJS*/
+
+.myChallenges{
+  width: 60%;
+  margin: 1rem auto;
+}
+.myChallengesTitle{
+  border-bottom: 2px solid #555555;
+  padding: 0.8rem 0px;
+  color: #555555;
+  font-size: 1.6em;
+}
+.myFriends{
+  width: 60%;
+  margin: 1rem auto;
+}
+.myFriendsTitle{
+  border-bottom: 2px solid #555555;
+  padding: 0.8rem 0px;
+  margin-bottom: 1rem;
+  color: #555555;
+  font-size: 1.6em;
+}
+.enterFriendName{
+  width: 30%;
+  padding: 1rem;
+  color: #555555;
+  font-size: 1.2em;
+}
+.findFriend{
+  width: 10%;
+  margin: 10px;
+  padding: 1em;
+  color: #555555;
+  font-size: 1em;
+  background-color: #dddddd;
+}
+.findFriend:hover{
+  background-color: #ddddcc;
+  cursor: pointer;
+}
+
+/*Footer*/
+
 .footer{
+  position: absolute;
+  bottom: 0px;
   width: 100%;
   padding: 1.2rem 0px;
   background-color: #eeeeee;
 }
 .footerText{
-  width: 1050px;
+  width: 60%;
   margin: 0 auto;
   color: #555555;
   font-size: 1rem;
