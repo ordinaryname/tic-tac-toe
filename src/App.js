@@ -5,6 +5,7 @@ import './App.css';
 import Home from './components/Home';
 import Challenge from './components/Challenge';
 import Error from './components/Error';
+import Login from './components/Login';
 
 class App extends Component {
   render() {
@@ -14,6 +15,8 @@ class App extends Component {
         <Switch>
           <Route path="/" component={Home} exact/>
           <Route path="/challenge" component={Challenge} exact/>
+          <Route path='/login' render={(props) => <Login {...props} login={true} />}/>
+          <Route path='/signup' render={(props) => <Login {...props} login={false} />}/>
           <Route component={Error} />
         </Switch>
       </BrowserRouter>

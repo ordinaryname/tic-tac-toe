@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import Header from './Header';
+import decode from 'jwt-decode';
 import anime from 'animejs';
+import Header from './Header';
 
 class Challenge extends Component {
 
