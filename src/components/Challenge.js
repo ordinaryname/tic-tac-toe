@@ -41,19 +41,25 @@ class Challenge extends Component {
     );
   }
 
+  friends = () => {
+    return(
+      <div className="friendsList">{this.state.friends}</div>
+    );
+  }
+
   render(){
     return(
       <div className="challenge">
-        <Header/>
-        <div className="myChallenges">
-        <h2 className="myChallengesTitle">My Challenges</h2>
-          {this.challenges()}
-        </div>
-        <div className="myFriends">
-          <h2 className="myFriendsTitle">My Friends</h2>
-          <input type="text" className="enterFriendName" placeholder="Find A Friend" onChange={this.updateFindFriend} onKeyUp={this.updateFindFriend}/>
-          <button className="findFriend" onClick={this.getUser}>Search</button>
-          <div className="friendsList">{this.state.friends}</div>
+        <div className="box">
+          <Header/>
+          <div className="defaultDiv">
+            <h2 className="defaultTitle">My Challenges</h2>
+            {this.challenges()}
+            <h2 className="defaultTitle">My Friends</h2>
+            <input type="text" className="defaultInput" placeholder="Find A Friend" onChange={this.updateFindFriend} onKeyUp={this.updateFindFriend}/>
+            <button className="defaultButton" onClick={this.getUser}>Search</button>
+            {this.friends()}
+          </div>
         </div>
         <div className="footer">
           <div className="footerText">&#169; <a href="https://raymondmutyaba.com/" className="copyrightText">Raymond Mutyaba</a> 2019</div>

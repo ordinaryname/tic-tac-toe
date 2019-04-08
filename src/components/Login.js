@@ -30,14 +30,14 @@ class Login extends Component {
     event.preventDefault();
     const url = '/signup';
     const signupData = `username=${this.state.username.toLowerCase()}&password=${this.state.password}`;
-    fetch(url, {method: 'POST', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}), body: signupData});
+    fetch(url, {method: 'POST', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin'}), body: signupData});
   }
 
   login = (event) => {
     event.preventDefault();
     const url = '/login';
     const loginData = `username=${this.state.username.toLowerCase()}&password=${this.state.password}`;
-    fetch(url, {method: 'POST', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}), body: loginData});
+    fetch(url, {method: 'POST', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin'}), body: loginData});
   }
 
   setLoginBoolean = (event, loginBoolean) => {
@@ -52,7 +52,7 @@ class Login extends Component {
         <input type="text" className="defaultInput" placeholder="username" onChange={this.getUsername} onKeyUp={this.getUsername}/>
         <input type="password" className="defaultInput" placeholder="password" onChange={this.getPassword} onKeyUp={this.getPassword}/>
         <button className="defaultButton" onClick={this.login}>Login</button>
-        <button className="defaultButton" onClick={(event) => this.setLoginBoolean(event, false)}>Already have a username? Login.</button>
+        <button className="defaultButton" onClick={(event) => this.setLoginBoolean(event, false)}>Already have a username? Signup.</button>
         <div className="errorMsg">{this.state.errorMsg}</div>
       </div>
     );
@@ -61,6 +61,7 @@ class Login extends Component {
   signupHTML = () => {
     return(
       <div className="signupHTML">
+        <h2 className="defaultTitle">Signup</h2>
         <input type="text" className="defaultInput" placeholder="username" onChange={this.getUsername} onKeyUp={this.getUsername}/>
         <input type="password" className="defaultInput" placeholder="password" onChange={this.getPassword} onKeyUp={this.getPassword}/>
         <button className="defaultButton" onClick={this.signup}>Create</button>
@@ -73,8 +74,10 @@ class Login extends Component {
   render(){
     return(
       <div className="login">
-        <Header/>
-        {this.state.login ? (this.loginHTML()) : (this.signupHTML())}
+        <div className="box">
+          <Header/>
+          <div className="defaultDiv">{this.state.login ? (this.loginHTML()) : (this.signupHTML())}</div>
+        </div>
         <div className="footer">
           <div className="footerText">&#169; <a href="https://raymondmutyaba.com/" className="copyrightText">Raymond Mutyaba</a> 2019</div>
         </div>

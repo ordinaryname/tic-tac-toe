@@ -328,129 +328,131 @@ class Home extends Component {
   render() {
     return(
       <div className="Home">
-        <Header />
-        <div className="scoreboard">
-          <h1 className="score">X : {this.xScore} | O : {this.oScore}</h1>
-          <h1 className="turn">Turn : {this.turn}</h1>
-        </div>
-        <div className="togglePlayer">
-          <button className="togglePlayerBtn" onClick={(event) => this.togglePlayer(event)} ref={(element) => {this.toggleButton = element;}}>{this.toggleButtonText}</button>
-        </div>
-        <div className="gameOverPanel" ref={(element) => {this.gameOverPanel = element;}}>
-          <h1 className="gameOverTitle">Thanks for playing!</h1>
-          <p className="gameOverText">Your Score: {this.xScore}<br/>High Score: {this.highScore}</p>
-          <button className="playAgain" onClick={(event) => this.playAgain(event)}>Play Again</button>
-          <button className="challengeFriends" onClick={(event) => this.challengeFriends(event)}>
-            Challenge a Friend &nbsp;
-            <svg className="igLogo" viewBox="0 0 503.84 503.84">
-              <path d="M256,49.47c67.27,0,75.23.26,101.8,1.47,24.56,1.12,37.9,5.22,46.78,8.67a78,78,0,0,1,29,18.85,78,78,0,0,1,18.85,29c3.45,8.88,7.55,22.22,8.67,46.78,1.21,26.57,1.47,34.53,1.47,101.8s-.26,75.23-1.47,101.8c-1.12,24.56-5.22,37.9-8.67,46.78a83.51,83.51,0,0,1-47.81,47.81c-8.88,3.45-22.22,7.55-46.78,8.67-26.56,1.21-34.53,1.47-101.8,1.47s-75.24-.26-101.8-1.47c-24.56-1.12-37.9-5.22-46.78-8.67a78,78,0,0,1-29-18.85,78,78,0,0,1-18.85-29c-3.45-8.88-7.55-22.22-8.67-46.78-1.21-26.57-1.47-34.53-1.47-101.8s.26-75.23,1.47-101.8c1.12-24.56,5.22-37.9,8.67-46.78a78,78,0,0,1,18.85-29,78,78,0,0,1,29-18.85c8.88-3.45,22.22-7.55,46.78-8.67,26.57-1.21,34.53-1.47,101.8-1.47m0-45.39c-68.42,0-77,.29-103.87,1.52S107,11.08,91,17.3A123.68,123.68,0,0,0,46.36,46.36,123.68,123.68,0,0,0,17.3,91c-6.22,16-10.48,34.34-11.7,61.15S4.08,187.58,4.08,256s.29,77,1.52,103.87S11.08,405,17.3,421a123.68,123.68,0,0,0,29.06,44.62A123.52,123.52,0,0,0,91,494.69c16,6.23,34.34,10.49,61.15,11.71s35.45,1.52,103.87,1.52,77-.29,103.87-1.52S405,500.92,421,494.69A128.74,128.74,0,0,0,494.69,421c6.23-16,10.49-34.34,11.71-61.15s1.52-35.45,1.52-103.87-.29-77-1.52-103.87S500.92,107,494.69,91a123.52,123.52,0,0,0-29.05-44.62A123.68,123.68,0,0,0,421,17.3c-16-6.22-34.34-10.48-61.15-11.7S324.42,4.08,256,4.08Z" transform="translate(-4.08 -4.08)"/>
-              <path d="M256,126.64A129.36,129.36,0,1,0,385.36,256,129.35,129.35,0,0,0,256,126.64ZM256,340a84,84,0,1,1,84-84A84,84,0,0,1,256,340Z" transform="translate(-4.08 -4.08)"/>
-              <circle cx="386.4" cy="117.44" r="30.23"/>
-            </svg>
-          </button>
-        </div>
-        <div className="container">
-          <div className="cell cell1 container-00" ref={(element) => {this.containers["container-00"] = element;}}>
-            {this.cellHtml(0, "cell1", "cell-0")}
-            {this.cellHtml(0, "cell2", "cell-1")}
-            {this.cellHtml(0, "cell3", "cell-2")}
-            {this.cellHtml(0, "cell4", "cell-3")}
-            {this.cellHtml(0, "cell5", "cell-4")}
-            {this.cellHtml(0, "cell6", "cell-5")}
-            {this.cellHtml(0, "cell7", "cell-6")}
-            {this.cellHtml(0, "cell8", "cell-7")}
-            {this.cellHtml(0, "cell9", "cell-8")}
+        <div className="box">
+          <Header />
+          <div className="scoreboard">
+            <h1 className="score">X : {this.xScore} | O : {this.oScore}</h1>
+            <h1 className="turn">Turn : {this.turn}</h1>
           </div>
-          <div className="cell2 container-01" ref={(element) => {this.containers["container-01"] = element;}}>
-            {this.cellHtml(1, "cell1", "cell-9")}
-            {this.cellHtml(1, "cell2", "cell-10")}
-            {this.cellHtml(1, "cell3", "cell-11")}
-            {this.cellHtml(1, "cell4", "cell-12")}
-            {this.cellHtml(1, "cell5", "cell-13")}
-            {this.cellHtml(1, "cell6", "cell-14")}
-            {this.cellHtml(1, "cell7", "cell-15")}
-            {this.cellHtml(1, "cell8", "cell-16")}
-            {this.cellHtml(1, "cell9", "cell-17")}
+          <div className="togglePlayer">
+            <button className="togglePlayerBtn" onClick={(event) => this.togglePlayer(event)} ref={(element) => {this.toggleButton = element;}}>{this.toggleButtonText}</button>
           </div>
-          <div className="cell3 container-02" ref={(element) => {this.containers["container-02"] = element;}}>
-            {this.cellHtml(2, "cell1", "cell-18")}
-            {this.cellHtml(2, "cell2", "cell-19")}
-            {this.cellHtml(2, "cell3", "cell-20")}
-            {this.cellHtml(2, "cell4", "cell-21")}
-            {this.cellHtml(2, "cell5", "cell-22")}
-            {this.cellHtml(2, "cell6", "cell-23")}
-            {this.cellHtml(2, "cell7", "cell-24")}
-            {this.cellHtml(2, "cell8", "cell-25")}
-            {this.cellHtml(2, "cell9", "cell-26")}
+          <div className="gameOverPanel" ref={(element) => {this.gameOverPanel = element;}}>
+            <h1 className="gameOverTitle">Thanks for playing!</h1>
+            <p className="gameOverText">Your Score: {this.xScore}<br/>High Score: {this.highScore}</p>
+            <button className="playAgain" onClick={(event) => this.playAgain(event)}>Play Again</button>
+            <button className="challengeFriends" onClick={(event) => this.challengeFriends(event)}>
+              Challenge a Friend &nbsp;
+              <svg className="igLogo" viewBox="0 0 503.84 503.84">
+                <path d="M256,49.47c67.27,0,75.23.26,101.8,1.47,24.56,1.12,37.9,5.22,46.78,8.67a78,78,0,0,1,29,18.85,78,78,0,0,1,18.85,29c3.45,8.88,7.55,22.22,8.67,46.78,1.21,26.57,1.47,34.53,1.47,101.8s-.26,75.23-1.47,101.8c-1.12,24.56-5.22,37.9-8.67,46.78a83.51,83.51,0,0,1-47.81,47.81c-8.88,3.45-22.22,7.55-46.78,8.67-26.56,1.21-34.53,1.47-101.8,1.47s-75.24-.26-101.8-1.47c-24.56-1.12-37.9-5.22-46.78-8.67a78,78,0,0,1-29-18.85,78,78,0,0,1-18.85-29c-3.45-8.88-7.55-22.22-8.67-46.78-1.21-26.57-1.47-34.53-1.47-101.8s.26-75.23,1.47-101.8c1.12-24.56,5.22-37.9,8.67-46.78a78,78,0,0,1,18.85-29,78,78,0,0,1,29-18.85c8.88-3.45,22.22-7.55,46.78-8.67,26.57-1.21,34.53-1.47,101.8-1.47m0-45.39c-68.42,0-77,.29-103.87,1.52S107,11.08,91,17.3A123.68,123.68,0,0,0,46.36,46.36,123.68,123.68,0,0,0,17.3,91c-6.22,16-10.48,34.34-11.7,61.15S4.08,187.58,4.08,256s.29,77,1.52,103.87S11.08,405,17.3,421a123.68,123.68,0,0,0,29.06,44.62A123.52,123.52,0,0,0,91,494.69c16,6.23,34.34,10.49,61.15,11.71s35.45,1.52,103.87,1.52,77-.29,103.87-1.52S405,500.92,421,494.69A128.74,128.74,0,0,0,494.69,421c6.23-16,10.49-34.34,11.71-61.15s1.52-35.45,1.52-103.87-.29-77-1.52-103.87S500.92,107,494.69,91a123.52,123.52,0,0,0-29.05-44.62A123.68,123.68,0,0,0,421,17.3c-16-6.22-34.34-10.48-61.15-11.7S324.42,4.08,256,4.08Z" transform="translate(-4.08 -4.08)"/>
+                <path d="M256,126.64A129.36,129.36,0,1,0,385.36,256,129.35,129.35,0,0,0,256,126.64ZM256,340a84,84,0,1,1,84-84A84,84,0,0,1,256,340Z" transform="translate(-4.08 -4.08)"/>
+                <circle cx="386.4" cy="117.44" r="30.23"/>
+              </svg>
+            </button>
           </div>
-          <div className="cell4 container-03" ref={(element) => {this.containers["container-03"] = element;}}>
-            {this.cellHtml(3, "cell1", "cell-27")}
-            {this.cellHtml(3, "cell2", "cell-28")}
-            {this.cellHtml(3, "cell3", "cell-29")}
-            {this.cellHtml(3, "cell4", "cell-30")}
-            {this.cellHtml(3, "cell5", "cell-31")}
-            {this.cellHtml(3, "cell6", "cell-32")}
-            {this.cellHtml(3, "cell7", "cell-33")}
-            {this.cellHtml(3, "cell8", "cell-34")}
-            {this.cellHtml(3, "cell9", "cell-35")}
+          <div className="container">
+            <div className="cell cell1 container-00" ref={(element) => {this.containers["container-00"] = element;}}>
+              {this.cellHtml(0, "cell1", "cell-0")}
+              {this.cellHtml(0, "cell2", "cell-1")}
+              {this.cellHtml(0, "cell3", "cell-2")}
+              {this.cellHtml(0, "cell4", "cell-3")}
+              {this.cellHtml(0, "cell5", "cell-4")}
+              {this.cellHtml(0, "cell6", "cell-5")}
+              {this.cellHtml(0, "cell7", "cell-6")}
+              {this.cellHtml(0, "cell8", "cell-7")}
+              {this.cellHtml(0, "cell9", "cell-8")}
+            </div>
+            <div className="cell2 container-01" ref={(element) => {this.containers["container-01"] = element;}}>
+              {this.cellHtml(1, "cell1", "cell-9")}
+              {this.cellHtml(1, "cell2", "cell-10")}
+              {this.cellHtml(1, "cell3", "cell-11")}
+              {this.cellHtml(1, "cell4", "cell-12")}
+              {this.cellHtml(1, "cell5", "cell-13")}
+              {this.cellHtml(1, "cell6", "cell-14")}
+              {this.cellHtml(1, "cell7", "cell-15")}
+              {this.cellHtml(1, "cell8", "cell-16")}
+              {this.cellHtml(1, "cell9", "cell-17")}
+            </div>
+            <div className="cell3 container-02" ref={(element) => {this.containers["container-02"] = element;}}>
+              {this.cellHtml(2, "cell1", "cell-18")}
+              {this.cellHtml(2, "cell2", "cell-19")}
+              {this.cellHtml(2, "cell3", "cell-20")}
+              {this.cellHtml(2, "cell4", "cell-21")}
+              {this.cellHtml(2, "cell5", "cell-22")}
+              {this.cellHtml(2, "cell6", "cell-23")}
+              {this.cellHtml(2, "cell7", "cell-24")}
+              {this.cellHtml(2, "cell8", "cell-25")}
+              {this.cellHtml(2, "cell9", "cell-26")}
+            </div>
+            <div className="cell4 container-03" ref={(element) => {this.containers["container-03"] = element;}}>
+              {this.cellHtml(3, "cell1", "cell-27")}
+              {this.cellHtml(3, "cell2", "cell-28")}
+              {this.cellHtml(3, "cell3", "cell-29")}
+              {this.cellHtml(3, "cell4", "cell-30")}
+              {this.cellHtml(3, "cell5", "cell-31")}
+              {this.cellHtml(3, "cell6", "cell-32")}
+              {this.cellHtml(3, "cell7", "cell-33")}
+              {this.cellHtml(3, "cell8", "cell-34")}
+              {this.cellHtml(3, "cell9", "cell-35")}
+            </div>
+            <div className="active cell5 container-04" ref={(element) => {this.containers["container-04"] = element;}}>
+              {this.cellHtml(4, "cell1", "cell-36")}
+              {this.cellHtml(4, "cell2", "cell-37")}
+              {this.cellHtml(4, "cell3", "cell-38")}
+              {this.cellHtml(4, "cell4", "cell-39")}
+              {this.cellHtml(4, "cell5", "cell-40")}
+              {this.cellHtml(4, "cell6", "cell-41")}
+              {this.cellHtml(4, "cell7", "cell-42")}
+              {this.cellHtml(4, "cell8", "cell-43")}
+              {this.cellHtml(4, "cell9", "cell-44")}
+            </div>
+            <div className="cell6 container-05" ref={(element) => {this.containers["container-05"] = element;}}>
+              {this.cellHtml(5, "cell1", "cell-45")}
+              {this.cellHtml(5, "cell2", "cell-46")}
+              {this.cellHtml(5, "cell3", "cell-47")}
+              {this.cellHtml(5, "cell4", "cell-48")}
+              {this.cellHtml(5, "cell5", "cell-49")}
+              {this.cellHtml(5, "cell6", "cell-50")}
+              {this.cellHtml(5, "cell7", "cell-51")}
+              {this.cellHtml(5, "cell8", "cell-52")}
+              {this.cellHtml(5, "cell9", "cell-53")}
+            </div>
+            <div className="cell7 container-06" ref={(element) => {this.containers["container-06"] = element;}}>
+              {this.cellHtml(6, "cell1", "cell-54")}
+              {this.cellHtml(6, "cell2", "cell-55")}
+              {this.cellHtml(6, "cell3", "cell-56")}
+              {this.cellHtml(6, "cell4", "cell-57")}
+              {this.cellHtml(6, "cell5", "cell-58")}
+              {this.cellHtml(6, "cell6", "cell-59")}
+              {this.cellHtml(6, "cell7", "cell-60")}
+              {this.cellHtml(6, "cell8", "cell-61")}
+              {this.cellHtml(6, "cell9", "cell-62")}
+            </div>
+            <div className="cell8 container-07" ref={(element) => {this.containers["container-07"] = element;}}>
+              {this.cellHtml(7, "cell1", "cell-63")}
+              {this.cellHtml(7, "cell2", "cell-64")}
+              {this.cellHtml(7, "cell3", "cell-65")}
+              {this.cellHtml(7, "cell4", "cell-66")}
+              {this.cellHtml(7, "cell5", "cell-67")}
+              {this.cellHtml(7, "cell6", "cell-68")}
+              {this.cellHtml(7, "cell7", "cell-69")}
+              {this.cellHtml(7, "cell8", "cell-70")}
+              {this.cellHtml(7, "cell9", "cell-71")}
+            </div>
+            <div className="cell9 container-08" ref={(element) => {this.containers["container-08"] = element;}}>
+              {this.cellHtml(8, "cell1", "cell-72")}
+              {this.cellHtml(8, "cell2", "cell-73")}
+              {this.cellHtml(8, "cell3", "cell-74")}
+              {this.cellHtml(8, "cell4", "cell-75")}
+              {this.cellHtml(8, "cell5", "cell-76")}
+              {this.cellHtml(8, "cell6", "cell-77")}
+              {this.cellHtml(8, "cell7", "cell-78")}
+              {this.cellHtml(8, "cell8", "cell-79")}
+              {this.cellHtml(8, "cell9", "cell-80")}
+            </div>
           </div>
-          <div className="active cell5 container-04" ref={(element) => {this.containers["container-04"] = element;}}>
-            {this.cellHtml(4, "cell1", "cell-36")}
-            {this.cellHtml(4, "cell2", "cell-37")}
-            {this.cellHtml(4, "cell3", "cell-38")}
-            {this.cellHtml(4, "cell4", "cell-39")}
-            {this.cellHtml(4, "cell5", "cell-40")}
-            {this.cellHtml(4, "cell6", "cell-41")}
-            {this.cellHtml(4, "cell7", "cell-42")}
-            {this.cellHtml(4, "cell8", "cell-43")}
-            {this.cellHtml(4, "cell9", "cell-44")}
-          </div>
-          <div className="cell6 container-05" ref={(element) => {this.containers["container-05"] = element;}}>
-            {this.cellHtml(5, "cell1", "cell-45")}
-            {this.cellHtml(5, "cell2", "cell-46")}
-            {this.cellHtml(5, "cell3", "cell-47")}
-            {this.cellHtml(5, "cell4", "cell-48")}
-            {this.cellHtml(5, "cell5", "cell-49")}
-            {this.cellHtml(5, "cell6", "cell-50")}
-            {this.cellHtml(5, "cell7", "cell-51")}
-            {this.cellHtml(5, "cell8", "cell-52")}
-            {this.cellHtml(5, "cell9", "cell-53")}
-          </div>
-          <div className="cell7 container-06" ref={(element) => {this.containers["container-06"] = element;}}>
-            {this.cellHtml(6, "cell1", "cell-54")}
-            {this.cellHtml(6, "cell2", "cell-55")}
-            {this.cellHtml(6, "cell3", "cell-56")}
-            {this.cellHtml(6, "cell4", "cell-57")}
-            {this.cellHtml(6, "cell5", "cell-58")}
-            {this.cellHtml(6, "cell6", "cell-59")}
-            {this.cellHtml(6, "cell7", "cell-60")}
-            {this.cellHtml(6, "cell8", "cell-61")}
-            {this.cellHtml(6, "cell9", "cell-62")}
-          </div>
-          <div className="cell8 container-07" ref={(element) => {this.containers["container-07"] = element;}}>
-            {this.cellHtml(7, "cell1", "cell-63")}
-            {this.cellHtml(7, "cell2", "cell-64")}
-            {this.cellHtml(7, "cell3", "cell-65")}
-            {this.cellHtml(7, "cell4", "cell-66")}
-            {this.cellHtml(7, "cell5", "cell-67")}
-            {this.cellHtml(7, "cell6", "cell-68")}
-            {this.cellHtml(7, "cell7", "cell-69")}
-            {this.cellHtml(7, "cell8", "cell-70")}
-            {this.cellHtml(7, "cell9", "cell-71")}
-          </div>
-          <div className="cell9 container-08" ref={(element) => {this.containers["container-08"] = element;}}>
-            {this.cellHtml(8, "cell1", "cell-72")}
-            {this.cellHtml(8, "cell2", "cell-73")}
-            {this.cellHtml(8, "cell3", "cell-74")}
-            {this.cellHtml(8, "cell4", "cell-75")}
-            {this.cellHtml(8, "cell5", "cell-76")}
-            {this.cellHtml(8, "cell6", "cell-77")}
-            {this.cellHtml(8, "cell7", "cell-78")}
-            {this.cellHtml(8, "cell8", "cell-79")}
-            {this.cellHtml(8, "cell9", "cell-80")}
-          </div>
-        </div>
-        <div className="errorMsg">{this.state.errorMsg}</div>
+          <div className="errorMsg">{this.state.errorMsg}</div>
+        </div>  
         <div className="footer">
           <div className="footerText">&#169; <a href="https://raymondmutyaba.com/" className="copyrightText">Raymond Mutyaba</a> 2019</div>
         </div>

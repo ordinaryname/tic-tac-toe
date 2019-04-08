@@ -8,7 +8,27 @@ class Header extends Component {
     this.state = {
       showAccountMenu:false,
       showShopMenu:false,
+      username:'',
     };
+  }
+
+  componentDidMount() {
+    this.getUser();
+  }
+
+  handleErrors = (response) => {
+    if (!response.ok) {
+      throw Error(response.statusText);
+    }
+    return response;
+  }
+
+  getUser = () => {
+    fetch('/users/me', {method: 'GET', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin'})})
+    .then(response => {this.handleErrors(response)})
+    .then(results => {return results.json();})
+    .then(data => {console.log(data)})
+    .catch(error => console.log(error));
   }
 
   showAccountMenu = (event) => {
@@ -37,6 +57,27 @@ class Header extends Component {
     } catch(err) {}
   }
 
+  accountMenuHTML = () => {
+    return(
+      <div className="accountMenu" ref={(element) => {this.accountMenu = element;}}>
+        <button className="userButton">Pick A Username</button>
+        <Link to="/login"><button className="userButton">Log In</button></Link>
+        <Link to="/signup"><button className="userButton">Create Username</button></Link>
+        <Link to="/challenge"><button className="userButton">Challenge Friends</button></Link>
+      </div>
+    );
+  }
+
+  shopMenuHTML = () => {
+    return(
+      <div className="shopMenu" ref={(element) => {this.shopMenu = element;}}>
+        <button className="shopButton">Use A Swap</button>
+        <button className="shopButton">Buy A Swap</button>
+        <button className="shopButton">Leave A Tip</button>
+      </div>
+    );
+  }
+
   render() {
     return(
       <div className="header">
@@ -55,21 +96,8 @@ class Header extends Component {
             </svg>
           </li>
         </ul>
-        {this.state.showAccountMenu?(
-          <div className="accountMenu" ref={(element) => {this.accountMenu = element;}}>
-            <button className="userButton">Pick A Username</button>
-            <Link to="/login"><button className="userButton">Log In</button></Link>
-            <Link to="/signup"><button className="userButton">Create Username</button></Link>
-            <Link to="/challenge"><button className="userButton">Challenge Friends</button></Link>
-          </div>
-        ):(null)}
-        {this.state.showShopMenu?(
-          <div className="shopMenu" ref={(element) => {this.shopMenu = element;}}>
-            <button className="shopButton">Use A Swap</button>
-            <button className="shopButton">Buy A Swap</button>
-            <button className="shopButton">Leave A Tip</button>
-          </div>
-        ):(null)}
+        {this.state.showAccountMenu?(this.accountMenuHTML()):(null)}
+        {this.state.showShopMenu?(this.shopMenuHTML()):(null)}
       </div>
     );
   }

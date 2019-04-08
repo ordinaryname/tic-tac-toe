@@ -5,8 +5,8 @@
 body{
   background-color: #f8f8f8;
 }
-.home{
-  width: 100%;
+.box{
+  min-height: calc(100vh - 4rem);
 }
 
 /*Header*/
@@ -354,6 +354,7 @@ body{
 }
 
 /*Defaults*/
+
 .defaultDiv{
   width: 60%;
   margin: 1rem auto;
@@ -367,17 +368,20 @@ body{
 }
 .defaultInput{
   width: 30%;
+  margin: 1rem 0;
   padding: 1rem;
   color: #555555;
   font-size: 1.2em;
+  display: block;
 }
 .defaultButton{
-  width: 10%;
-  margin: 10px;
+  min-width: 10%;
+  margin: 1rem 0;
   padding: 1em;
   color: #555555;
   font-size: 1em;
   background-color: #dddddd;
+  display: block;
 }
 .defaultButton:hover{
   background-color: #ddddcc;
@@ -386,20 +390,6 @@ body{
 
 /*ChallengeJS*/
 
-.myChallenges{
-  width: 60%;
-  margin: 1rem auto;
-}
-.myChallengesTitle{
-  border-bottom: 2px solid #555555;
-  padding: 0.8rem 0px;
-  color: #555555;
-  font-size: 1.6em;
-}
-.myFriends{
-  width: 60%;
-  margin: 1rem auto;
-}
 .myFriendsTitle{
   border-bottom: 2px solid #555555;
   padding: 0.8rem 0px;
@@ -429,10 +419,11 @@ body{
 /*Footer*/
 
 .footer{
-  position: absolute;
-  bottom: 0px;
+  position: relative;
+  bottom: 0;
   width: 100%;
-  padding: 1.2rem 0px;
+  height: 1rem;
+  padding: 1rem 0px;
   background-color: #eeeeee;
 }
 .footerText{
