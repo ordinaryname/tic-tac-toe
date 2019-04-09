@@ -30,14 +30,34 @@ class Login extends Component {
     event.preventDefault();
     const url = '/signup';
     const signupData = `username=${this.state.username.toLowerCase()}&password=${this.state.password}`;
-    fetch(url, {method: 'POST', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin'}), body: signupData});
+    fetch(url, {method: 'POST', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin'}), body: signupData})
+    .then(response => {
+      if (!response.ok) {
+        this.setState({errorMsg: 'Unable to sign up!'});
+        throw Error(response.statusText);
+      } else {
+        localStorage.setItem('accessToken', response.headers.get('x-auth-token'));
+        this.props.history.push("/");
+      }
+    })
+    .catch(error => console.log(error))
   }
 
   login = (event) => {
     event.preventDefault();
     const url = '/login';
     const loginData = `username=${this.state.username.toLowerCase()}&password=${this.state.password}`;
-    fetch(url, {method: 'POST', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin'}), body: loginData});
+    fetch(url, {method: 'PUT', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin'}), body: loginData})
+    .then(response => {
+      if (!response.ok) {
+        this.setState({errorMsg: 'Unable to log in!'});
+        throw Error(response.statusText);
+      } else {
+        localStorage.setItem('accessToken', response.headers.get('x-auth-token'));
+        this.props.history.push("/");
+      }
+    })
+    .catch(error => console.log(error))
   }
 
   setLoginBoolean = (event, loginBoolean) => {

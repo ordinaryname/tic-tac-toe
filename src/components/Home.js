@@ -106,6 +106,15 @@ class Home extends Component {
     this.gameOverPanel.classList.add("displayBlock");
   }
 
+  saveGame = () => {
+    //Send game progress to the server
+    const gamePackage = {gridcells: this.state.gridcells[0], player: this.state.player, playersTurn: this.state.playersTurn, turn: this.turn, xScore: this.xScore, oScore: this.oScore};
+    const game = `game=${JSON.stringify(gamePackage)}`;
+    fetch('/users/game', {method: 'PUT', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin', 'x-auth-token': localStorage.getItem('accessToken')}), body: game})
+    .then(response => {})
+    .catch(error => console.log(error))
+  }
+
   updateCell = (gridNumber, cellName, player) => {
     if(this.state.gridcells[0][cellName] === "none") {
       // Update grid item with player piece
@@ -114,6 +123,7 @@ class Home extends Component {
       this.setState({errorMsg:"", gridcells:cells});
       this.updateScore(gridNumber, cellName);
       this.turn += 1;
+      this.saveGame();
       //Switch player between human and computer(or friend)
       if(this.state.playersTurn === true) {
         this.setState({playersTurn:false});
@@ -452,7 +462,7 @@ class Home extends Component {
             </div>
           </div>
           <div className="errorMsg">{this.state.errorMsg}</div>
-        </div>  
+        </div>
         <div className="footer">
           <div className="footerText">&#169; <a href="https://raymondmutyaba.com/" className="copyrightText">Raymond Mutyaba</a> 2019</div>
         </div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 class Header extends Component {
 
@@ -20,14 +20,16 @@ class Header extends Component {
     if (!response.ok) {
       throw Error(response.statusText);
     }
-    return response;
+    return response.json();
   }
 
   getUser = () => {
-    fetch('/users/me', {method: 'GET', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin'})})
-    .then(response => {this.handleErrors(response)})
-    .then(results => {return results.json();})
-    .then(data => {console.log(data)})
+    fetch('/users/me', {method: 'GET', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin', 'x-auth-token': localStorage.getItem('accessToken')})})
+    .then(response => {return this.handleErrors(response)})
+    .then(data => {
+      this.setState({username: data.name});
+      console.log(data);
+    })
     .catch(error => console.log(error));
   }
 
@@ -57,15 +59,32 @@ class Header extends Component {
     } catch(err) {}
   }
 
+  logout = (event) => {
+    event.preventDefault();
+    localStorage.setItem('accessToken', null);
+    this.setState({username: ''});
+    return <Redirect to='/'/>
+  }
+
   accountMenuHTML = () => {
-    return(
-      <div className="accountMenu" ref={(element) => {this.accountMenu = element;}}>
-        <button className="userButton">Pick A Username</button>
-        <Link to="/login"><button className="userButton">Log In</button></Link>
-        <Link to="/signup"><button className="userButton">Create Username</button></Link>
-        <Link to="/challenge"><button className="userButton">Challenge Friends</button></Link>
-      </div>
-    );
+    if(this.state.username === '') {
+      return(
+        <div className="accountMenu" ref={(element) => {this.accountMenu = element;}}>
+          <button className="userButton">Pick A Username</button>
+          <Link to="/login"><button className="userButton">Log In</button></Link>
+          <Link to="/signup"><button className="userButton">Create Username</button></Link>
+          <Link to="/challenge"><button className="userButton">Challenge Friends</button></Link>
+        </div>
+      );
+    } else {
+      return(
+        <div className="accountMenu" ref={(element) => {this.accountMenu = element;}}>
+          <button className="userButton">Hello, {this.state.username}</button>
+          <Link to="/challenge"><button className="userButton">Challenge Friends</button></Link>
+          <button className="userButton" onClick={this.logout}>Log Out</button>
+        </div>
+      );
+    }
   }
 
   shopMenuHTML = () => {
