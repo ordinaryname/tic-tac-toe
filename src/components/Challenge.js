@@ -24,14 +24,11 @@ class Challenge extends Component {
 
   getUser = (event) => {
     event.preventDefault();
-    fetch(`/users/${this.state.userInput}`)
+    const body = `searchString=${this.state.userInput}`;
+    fetch(`/users/findFriend/?searchString=${this.state.userInput}`, {method: 'GET', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin', 'x-auth-token': localStorage.getItem('accessToken')})})
     .then(results => {return results.json();})
     .then(data => {
-      let friends = Object.values(data).map((friend) => {
-        console.log({friend});
-        return({friend}["friend"])
-      })
-      this.setState({friends: friends});
+      console.log(data);
     })
   }
 

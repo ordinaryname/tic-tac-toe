@@ -28,7 +28,6 @@ class Header extends Component {
     .then(response => {return this.handleErrors(response)})
     .then(data => {
       this.setState({username: data.name});
-      console.log(data);
     })
     .catch(error => console.log(error));
   }

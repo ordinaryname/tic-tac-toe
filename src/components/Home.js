@@ -7,7 +7,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: [],
+      user: '',
       player: "x",
       playersTurn: true,
       errorMsg: "",
@@ -19,7 +19,7 @@ class Home extends Component {
     this.cell = [];
     this.containers = [];
     this.toggleButton = React.createRef();
-    this.toggleButtonText = "Show Game Over Panel";
+    this.toggleButtonText = "Game Over Panel";
     this.turn = 0;
     this.xScore = 0;
     this.oScore = 0;
@@ -31,6 +31,33 @@ class Home extends Component {
   }
 
   componentDidMount() {
+    this.loadPreviousGame();
+  }
+
+  handleErrors = (response) => {
+    if (!response.ok) {
+      throw Error(response.statusText);
+    }
+    return response.json();
+  }
+
+  loadPreviousGame = () => {
+    fetch('/users/me', {method: 'GET', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin', 'x-auth-token': localStorage.getItem('accessToken')})})
+    .then(response => {return this.handleErrors(response)})
+    .then(data => {
+      if(JSON.parse(data.game).turn > 0 && JSON.parse(data.game).turn < 80) {
+        this.turn = JSON.parse(data.game).turn;
+        this.xScore = JSON.parse(data.game).xScore;
+        this.oScore = JSON.parse(data.game).oScore;
+        this.highScore = data.highScore;
+        this.setState({user: data.name, gridcells: [JSON.parse(data.game).gridcells], player: JSON.parse(data.game).player, playersTurn: JSON.parse(data.game).playersTurn});
+        for(var i = 0; i <= 8; i++) {
+          this.displayNextContainer(i);
+        }
+        console.log(this.state);
+      }
+    })
+    .catch(error => console.log(error));
   }
 
   anime = (box1, box2, box3) => {
@@ -108,7 +135,7 @@ class Home extends Component {
 
   saveGame = () => {
     //Send game progress to the server
-    const gamePackage = {gridcells: this.state.gridcells[0], player: this.state.player, playersTurn: this.state.playersTurn, turn: this.turn, xScore: this.xScore, oScore: this.oScore};
+    const gamePackage = {gridcells: this.state.gridcells[0], player: this.state.player, playersTurn: true, turn: this.turn, xScore: this.xScore, oScore: this.oScore};
     const game = `game=${JSON.stringify(gamePackage)}`;
     fetch('/users/game', {method: 'PUT', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin', 'x-auth-token': localStorage.getItem('accessToken')}), body: game})
     .then(response => {})
@@ -161,6 +188,32 @@ class Home extends Component {
     }
   }
 
+  displayNextContainer = (gridNumber) => {
+    for(var i = 0; i < 9; i++) {
+      let key = "cell-" + ((gridNumber * 9) + i);
+      if(this.state.gridcells[0][key] === "none"){
+        break;
+      } else if(key === "cell-44" && this.state.gridcells[0][key] !== "none") {
+        this.containers["container-05"].classList.add("active");
+      } else if(key === "cell-53" && this.state.gridcells[0][key] !== "none") {
+        this.containers["container-02"].classList.add("active");
+      } else if(key === "cell-26" && this.state.gridcells[0][key] !== "none") {
+        this.containers["container-01"].classList.add("active");
+      } else if(key === "cell-17" && this.state.gridcells[0][key] !== "none") {
+        this.containers["container-00"].classList.add("active");
+      } else if(key === "cell-8" && this.state.gridcells[0][key] !== "none") {
+        this.containers["container-03"].classList.add("active");
+      } else if(key === "cell-35" && this.state.gridcells[0][key] !== "none") {
+        this.containers["container-06"].classList.add("active");
+      } else if(key === "cell-62" && this.state.gridcells[0][key] !== "none") {
+        this.containers["container-07"].classList.add("active");
+      } else if(key === "cell-71" && this.state.gridcells[0][key] !== "none") {
+        this.containers["container-08"].classList.add("active");
+      } else if(key === "cell-80" && this.state.gridcells[0][key] !== "none") {
+      }
+    }
+  }
+
   selectCell = (event, gridNumber, cellName) => {
     event.preventDefault();
     this.updateCell(gridNumber, cellName, this.state.player);
@@ -186,20 +239,20 @@ class Home extends Component {
   renderCell = (gridNumber, cellName) => {
     if(this.state.gridcells[0][cellName] === "o") {
       return(
-        <svg width="100" height="100" viewBox="0 0 24 24">
+        <svg width="60" height="60" viewBox="0 0 24 24">
           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/><path d="M0 0h24v24H0z" fill="none"/>
         </svg>
       );
     } else if(this.state.gridcells[0][cellName] === "x") {
       return(
-        <svg width="100" height="100" viewBox="0 0 24 24">
+        <svg width="60" height="60" viewBox="0 0 24 24">
           <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/><path d="M0 0h24v24H0z" fill="none"/>
         </svg>
       );
     } else {
       return(
-        <svg width="100" height="100">
-          <rect width="100" height="100" fill="none" />
+        <svg width="60" height="60">
+          <rect width="60" height="60" fill="none" />
         </svg>
       );
     }
@@ -341,8 +394,7 @@ class Home extends Component {
         <div className="box">
           <Header />
           <div className="scoreboard">
-            <h1 className="score">X : {this.xScore} | O : {this.oScore}</h1>
-            <h1 className="turn">Turn : {this.turn}</h1>
+            <div className="score">X : {this.xScore}</div><div className="score">O : {this.oScore}</div><div className="score">Turn : {this.turn}</div>
           </div>
           <div className="togglePlayer">
             <button className="togglePlayerBtn" onClick={(event) => this.togglePlayer(event)} ref={(element) => {this.toggleButton = element;}}>{this.toggleButtonText}</button>
