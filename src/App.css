@@ -392,7 +392,7 @@ body{
 }
 .enterFriendName{
   width: 30%;
-  padding: 1rem;
+  padding: 1em;
   color: #555555;
   font-size: 1.2em;
 }
@@ -407,6 +407,43 @@ body{
 .findFriend:hover{
   background-color: #ddddcc;
   cursor: pointer;
+}
+.userList{
+  width: 35%;
+}
+.userListItem{
+  width: 100%;
+  text-align: left;
+  font-size: 1.2em;
+  padding: 0.6em 1em;
+  background-color: #efefef;
+  color: #555555;
+  border: none;
+  text-decoration: none;
+}
+.userListItem:hover{
+  background-color: #aaaaaa;
+  color: white;
+}
+.userProfile{
+  display: flex;
+}
+.username{
+  min-height: 60px;
+  margin: auto auto auto 0;
+  float: left;
+  font-size: 1.6em;
+  display: block;
+  color: #555555;
+  text-align: center;
+}
+.addButton{
+  float: right;
+  display: block;
+  fill: #555555;
+}
+.addButton:hover{
+  fill: #0000cc;
 }
 
 /*Footer*/

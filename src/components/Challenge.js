@@ -10,6 +10,10 @@ class Challenge extends Component {
     this.state = {
       hasUsername:false,
       userInput:'',
+      listUsers: false,
+      showUser: false,
+      user: '',
+      users:[],
       friends:[],
     };
   }
@@ -20,16 +24,29 @@ class Challenge extends Component {
 
   updateFindFriend = (event) => {
     this.setState({userInput:event.target.value});
+    if(this.state.userInput.length === 0) {
+      this.setState({listUsers: false});
+    } else {
+      this.getUser();
+    }
   }
 
-  getUser = (event) => {
-    event.preventDefault();
-    const body = `searchString=${this.state.userInput}`;
+  getUser = () => {
     fetch(`/users/findFriend/?searchString=${this.state.userInput}`, {method: 'GET', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin', 'x-auth-token': localStorage.getItem('accessToken')})})
     .then(results => {return results.json();})
     .then(data => {
-      console.log(data);
+      let users = Object.values(data).map((user) => {
+
+        return(<button className="userListItem" key={user.name} onClick={(event) => this.showUser(event, user._id, user.name)}>{user.name}</button>)
+      })
+      this.setState({users: users, listUsers: true});
     })
+  }
+
+  showUser = (event, id, name) => {
+    event.preventDefault();
+    this.setState({listUsers: false, showUser: true, user: name});
+    console.log(name);
   }
 
   challenges = () => {
@@ -44,6 +61,23 @@ class Challenge extends Component {
     );
   }
 
+  userListHTML = () => {
+    return(
+      <div className="userList">{this.state.users}</div>
+    );
+  }
+
+  userProfile = (username) => {
+    return(
+      <div className="userProfile">
+        <span className="username">Add @{username} to friends list</span>
+        <svg className="addButton" width="50" height="50" viewBox="0 0 24 24">
+          <path d="M0 0h24v24H0z" fill="none"/><path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+        </svg>
+      </div>
+    );
+  }
+
   render(){
     return(
       <div className="challenge">
@@ -54,7 +88,8 @@ class Challenge extends Component {
             {this.challenges()}
             <h2 className="defaultTitle">My Friends</h2>
             <input type="text" className="defaultInput" placeholder="Find A Friend" onChange={this.updateFindFriend} onKeyUp={this.updateFindFriend}/>
-            <button className="defaultButton" onClick={this.getUser}>Search</button>
+            {this.state.listUsers?(this.userListHTML()):(null)}
+            {this.state.showUser?(this.userProfile(this.state.user)):(null)}
             {this.friends()}
           </div>
         </div>
