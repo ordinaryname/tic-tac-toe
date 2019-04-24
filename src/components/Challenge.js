@@ -8,22 +8,57 @@ class Challenge extends Component {
   constructor(props){
     super(props);
     this.state = {
-      hasUsername:false,
+      username: '',
+      friendRequests:[],
       userInput:'',
       listUsers: false,
       showUser: false,
       user: '',
+      userId: '',
       users:[],
       friends:[],
     };
   }
 
   componentDidMount(){
+    fetch('/users/me', {method: 'GET', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin', 'x-auth-token': localStorage.getItem('accessToken')})})
+    .then(response => {return this.handleErrors(response)})
+    .then(data => {
+      let friendRequests = Object.values(data.friendRequest).map((friendRequest) => {
+        return(
+          <div className="friendRequest">
+            <span className="friendRequestText">friendRequest</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" className="optionsIcon">
+              <path d="M0 0h24v24H0z" fill="none"/><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+            </svg>
+          </div>
+        );
+      });
+      let friends = Object.values(data.friends).map((friend) => {
+        return(
+          <div className="friend">
+            <span className="friendText">friend</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" className="optionsIcon">
+              <path d="M0 0h24v24H0z" fill="none"/><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+            </svg>
+          </div>
+        );
+      });
+      this.setState({username: data.name, friendRequests: friendRequests, friends: friends});
+    })
+    .catch(error => console.log(error));
+  }
 
+  handleErrors = (response) => {
+    if (!response.ok) {
+      throw Error(response.statusText);
+    }
+    return response.json();
   }
 
   updateFindFriend = (event) => {
     this.setState({userInput:event.target.value});
+    this.setState({showUser: false});
     if(this.state.userInput.length === 0) {
       this.setState({listUsers: false});
     } else {
@@ -36,7 +71,6 @@ class Challenge extends Component {
     .then(results => {return results.json();})
     .then(data => {
       let users = Object.values(data).map((user) => {
-
         return(<button className="userListItem" key={user.name} onClick={(event) => this.showUser(event, user._id, user.name)}>{user.name}</button>)
       })
       this.setState({users: users, listUsers: true});
@@ -45,8 +79,14 @@ class Challenge extends Component {
 
   showUser = (event, id, name) => {
     event.preventDefault();
-    this.setState({listUsers: false, showUser: true, user: name});
+    this.setState({listUsers: false, showUser: true, user: name, userId: id});
     console.log(name);
+  }
+
+  friendRequests = () => {
+    return(
+      <div className="friendRequestList">{this.state.friendRequests}</div>
+    );
   }
 
   challenges = () => {
@@ -71,11 +111,18 @@ class Challenge extends Component {
     return(
       <div className="userProfile">
         <span className="username">Add @{username} to friends list</span>
-        <svg className="addButton" width="50" height="50" viewBox="0 0 24 24">
+        <svg className="addButton" width="30" height="30" viewBox="0 0 24 24" onClick={(event) => this.sendFriendRequest(event)}>
           <path d="M0 0h24v24H0z" fill="none"/><path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
         </svg>
       </div>
     );
+  }
+
+  sendFriendRequest = (event) => {
+    const body = `friendId=${this.state.userId}`;
+    fetch('/users/addFriend', {method: 'PUT', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin', 'x-auth-token': localStorage.getItem('accessToken')}), body: body})
+    .then(response => {})
+    .catch(error => console.log(error))
   }
 
   render(){
@@ -84,9 +131,11 @@ class Challenge extends Component {
         <div className="box">
           <Header/>
           <div className="defaultDiv">
-            <h2 className="defaultTitle">My Challenges</h2>
+            <h2 className="defaultTitle">Friend Requests</h2>
+            {this.friendRequests()}
+            <h2 className="defaultTitle">Challenges</h2>
             {this.challenges()}
-            <h2 className="defaultTitle">My Friends</h2>
+            <h2 className="defaultTitle">Friends</h2>
             <input type="text" className="defaultInput" placeholder="Find A Friend" onChange={this.updateFindFriend} onKeyUp={this.updateFindFriend}/>
             {this.state.listUsers?(this.userListHTML()):(null)}
             {this.state.showUser?(this.userProfile(this.state.user)):(null)}

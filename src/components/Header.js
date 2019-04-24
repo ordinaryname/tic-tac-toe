@@ -8,6 +8,7 @@ class Header extends Component {
     this.state = {
       showAccountMenu:false,
       showShopMenu:false,
+      showNotificationDot: false,
       username:'',
     };
   }
@@ -28,6 +29,7 @@ class Header extends Component {
     .then(response => {return this.handleErrors(response)})
     .then(data => {
       this.setState({username: data.name});
+      if(data.friendRequest > 0){this.setState({showNotificationDot: true});}
     })
     .catch(error => console.log(error));
   }
@@ -76,13 +78,24 @@ class Header extends Component {
         </div>
       );
     } else {
-      return(
-        <div className="accountMenu" ref={(element) => {this.accountMenu = element;}}>
-          <button className="userButton">Hello, {this.state.username}</button>
-          <Link to="/challenge"><button className="userButton">Challenge Friends</button></Link>
-          <button className="userButton" onClick={this.logout}>Log Out</button>
-        </div>
-      );
+      if(this.state.showNotificationDot){
+        return(
+          <div className="accountMenu" ref={(element) => {this.accountMenu = element;}}>
+            <button className="userButton">Hello, {this.state.username}</button>
+            <Link to="/challenge"><button className="userButton">Challenge Friends</button></Link>
+            <Link to="/challenge"><button className="userButton">New Friend Request</button></Link>
+            <button className="userButton" onClick={this.logout}>Log Out</button>
+          </div>
+        );
+      } else {
+        return(
+          <div className="accountMenu" ref={(element) => {this.accountMenu = element;}}>
+            <button className="userButton">Hello, {this.state.username}</button>
+            <Link to="/challenge"><button className="userButton">Challenge Friends</button></Link>
+            <button className="userButton" onClick={this.logout}>Log Out</button>
+          </div>
+        );
+      }
     }
   }
 
@@ -93,6 +106,16 @@ class Header extends Component {
         <button className="shopButton">Buy A Swap</button>
         <button className="shopButton">Leave A Tip</button>
       </div>
+    );
+  }
+
+  notificationDotHTML = () => {
+    return(
+      <li className="menuItem">
+        <svg width="16" height="16" className="redDot">
+          <circle cx="8" cy="8" r="8" fill="red" />
+        </svg>
+      </li>
     );
   }
 
@@ -113,6 +136,7 @@ class Header extends Component {
               <path d="M0 0h24v24H0z" fill="none"/>
             </svg>
           </li>
+          {this.state.showNotificationDot?(this.notificationDotHTML()):(null)}
         </ul>
         {this.state.showAccountMenu?(this.accountMenuHTML()):(null)}
         {this.state.showShopMenu?(this.shopMenuHTML()):(null)}

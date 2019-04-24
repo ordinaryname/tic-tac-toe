@@ -33,6 +33,7 @@ body{
 }
 .homeButton:hover{
   color: #055055;
+  cursor: pointer;
 }
 .menu{
   margin-right: 15%;
@@ -53,6 +54,11 @@ body{
 }
 .accountIcon:hover{
   fill: #0000cc;
+  cursor: pointer;
+}
+.redDot{
+  position: relative;
+  left: calc(0.5rem + 50px);
 }
 .accountMenu{
   max-height: 250px;
@@ -75,6 +81,7 @@ body{
 .userButton:hover{
   background-color: #aaaaaa;
   color: white;
+  cursor: pointer;
 }
 .inAppPurchases{
   width: 2.5rem;
@@ -83,6 +90,7 @@ body{
 }
 .inAppPurchases:hover{
   fill: #0000cc;
+  cursor: pointer;
 }
 .shopMenu{
   max-height: 250px;
@@ -105,6 +113,7 @@ body{
 .shopButton:hover{
   background-color: #aaaaaa;
   color: white;
+  cursor: pointer;
 }
 
 /*Scoreboard*/
@@ -357,12 +366,12 @@ body{
   padding: 0.8rem 0px;
   margin-bottom: 1rem;
   color: #555555;
-  font-size: 1.6em;
+  font-size: 1.2em;
 }
 .defaultInput{
-  width: 30%;
+  width: 50%;
   margin: 1rem 0;
-  padding: 1rem;
+  padding: 0.5rem;
   color: #555555;
   font-size: 1.2em;
   display: block;
@@ -383,12 +392,36 @@ body{
 
 /*ChallengeJS*/
 
-.myFriendsTitle{
-  border-bottom: 2px solid #555555;
-  padding: 0.8rem 0px;
-  margin-bottom: 1rem;
-  color: #555555;
+.friendRequest{
+  display: flex;
+}
+.friendRequestText{
+  min-height: 60px;
+  margin: auto auto auto 0;
+  float: left;
   font-size: 1.6em;
+  display: block;
+  color: #555555;
+}
+.friend{
+  display: flex;
+}
+.friendText{
+  min-height: 60px;
+  margin: auto auto auto 0;
+  float: left;
+  font-size: 1.6em;
+  display: block;
+  color: #555555;
+}
+.optionsIcon{
+  float: right;
+  display: block;
+  fill: #555555;
+}
+.optionsIcon:hover{
+  fill: #0000cc;
+  cursor: pointer;
 }
 .enterFriendName{
   width: 30%;
@@ -424,6 +457,7 @@ body{
 .userListItem:hover{
   background-color: #aaaaaa;
   color: white;
+  cursor: pointer;
 }
 .userProfile{
   display: flex;
@@ -432,10 +466,9 @@ body{
   min-height: 60px;
   margin: auto auto auto 0;
   float: left;
-  font-size: 1.6em;
+  font-size: 1.2em;
   display: block;
   color: #555555;
-  text-align: center;
 }
 .addButton{
   float: right;
@@ -444,6 +477,7 @@ body{
 }
 .addButton:hover{
   fill: #0000cc;
+  cursor: pointer;
 }
 
 /*Footer*/
