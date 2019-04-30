@@ -392,6 +392,41 @@ body{
 
 /*ChallengeJS*/
 
+.box{
+  width: 100%;
+}
+.challenges{
+  display: flex;
+}
+.challengeText{
+  min-height: 60px;
+  margin: auto auto auto 0;
+  float: left;
+  font-size: 1.6em;
+  display: block;
+  color: #555555;
+}
+.acceptButton{
+  width: 40px;
+  float: right;
+  display: block;
+  background-color: #0000cc;
+}
+.acceptButton:hover{
+  background-color: #000077;
+  cursor: pointer;
+}
+.ignoreButton{
+  width: 40px;
+  padding-left: 5px;
+  float: right;
+  display: block;
+  background-color: #555555;
+}
+.ignoreButton:hover{
+  background-color: #333333;
+  cursor: pointer;
+}
 .friendRequest{
   display: flex;
 }
@@ -403,7 +438,7 @@ body{
   display: block;
   color: #555555;
 }
-.friend{
+.friends{
   display: flex;
 }
 .friendText{
