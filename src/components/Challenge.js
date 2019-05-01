@@ -22,6 +22,9 @@ class Challenge extends Component {
   }
 
   componentDidMount(){
+
+    //Not ready yet
+
     fetch('/users/me', {method: 'GET', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin', 'x-auth-token': localStorage.getItem('accessToken')})})
     .then(response => {return this.handleErrors(response)})
     .then(data => {
@@ -71,7 +74,8 @@ class Challenge extends Component {
     const body = `friendId=${this.state.userId}`;
     fetch('/users/acceptChallenge', {method: 'PUT', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin', 'x-auth-token': localStorage.getItem('accessToken')}), body: body})
     .then(response => {})
-    .catch(error => console.log(error))
+    .catch(error => console.log(error));
+    return <Redirect to='/game'/>
   }
 
   ignoreChallenge = (event, id) => {
