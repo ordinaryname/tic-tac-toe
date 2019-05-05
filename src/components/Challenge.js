@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Redirect } from "react-router-dom";
 import decode from 'jwt-decode';
 import anime from 'animejs';
 import Header from './Header';

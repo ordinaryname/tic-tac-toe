@@ -33,7 +33,7 @@ class Game extends Component {
   componentDidUpdate() {
 
     //Not ready yet
-    
+
   }
 
   componentDidMount() {
@@ -143,7 +143,7 @@ class Game extends Component {
   saveGame = () => {
     //Send game progress to the server
     const gamePackage = {gridcells: this.state.gridcells[0], player: this.state.player, playersTurn: true, turn: this.turn, xScore: this.xScore, oScore: this.oScore};
-    const game = `game=${JSON.stringify(gamePackage)}`;
+    const game = `game=${JSON.stringify(gamePackage)}&challenger=${this.state.user2}`;
     fetch('/users/challengeGame', {method: 'PUT', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin', 'x-auth-token': localStorage.getItem('accessToken')}), body: game})
     .then(response => {})
     .catch(error => console.log(error))
