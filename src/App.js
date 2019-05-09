@@ -4,6 +4,7 @@ import './App.css';
 
 import Home from './components/Home';
 import Challenge from './components/Challenge';
+import Game from './components/Game';
 import Error from './components/Error';
 import Login from './components/Login';
 
@@ -15,6 +16,7 @@ class App extends Component {
         <Switch>
           <Route path="/" component={Home} exact/>
           <Route path="/challenge" component={Challenge} exact/>
+          <Route path='/game' component={Game} exact/>
           <Route path='/login' render={(props) => <Login {...props} login={true} />}/>
           <Route path='/signup' render={(props) => <Login {...props} login={false} />}/>
           <Route component={Error} />

@@ -401,7 +401,9 @@ class Game extends Component {
         <div className="box">
           <Header />
           <div className="scoreboard">
-            <div className="score">X : {this.xScore}</div><div className="score">O : {this.oScore}</div><div className="score">Turn : {this.turn}</div>
+            <div className="score">{(this.state.user !== '')?('@' + this.state.user):('X')} : {this.xScore}</div>
+            <div className="score">{(this.state.user2 !== '')?('@' + this.state.user2):('O')} : {this.oScore}</div>
+            <div className="score">Turn : {this.turn}</div>
           </div>
           <div className="togglePlayer">
             <button className="togglePlayerBtn" onClick={(event) => this.togglePlayer(event)} ref={(element) => {this.toggleButton = element;}}>{this.toggleButtonText}</button>
