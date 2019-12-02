@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header from './Header';
+//import Header from './Header';
 import anime from 'animejs';
 
 class Home extends Component {
@@ -19,10 +19,11 @@ class Home extends Component {
     this.cell = [];
     this.containers = [];
     this.toggleButton = React.createRef();
-    this.toggleButtonText = "Game Over Panel";
+    this.toggleButtonText = "Switch Player";
     this.turn = 0;
     this.xScore = 0;
     this.oScore = 0;
+    this.playerX = true;
     this.highScore = 0;
     this.gameOverPanel = React.createRef();
   }
@@ -31,7 +32,13 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.loadPreviousGame();
+    //this.loadPreviousGame();
+    if(this.state.player === "x"){
+      this.xScoreDiv.classList.add("selectedPlayer");
+    } else {
+      this.oScoreDiv.classList.add("selectedPlayer");
+      this.playerX = false;
+    }
   }
 
   handleErrors = (response) => {
@@ -42,7 +49,7 @@ class Home extends Component {
   }
 
   loadPreviousGame = () => {
-    fetch('/users/me', {method: 'GET', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin', 'x-auth-token': localStorage.getItem('accessToken')})})
+    fetch('https://tictactoeplus.com:3001/users/me', {method: 'GET', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin', 'x-auth-token': localStorage.getItem('accessToken')})})
     .then(response => {return this.handleErrors(response)})
     .then(data => {
       if(JSON.parse(data.game).turn > 0 && JSON.parse(data.game).turn < 80) {
@@ -115,8 +122,14 @@ class Home extends Component {
     this.turn = 0;
     this.xScore = 0;
     this.oScore = 0;
+    this.playerX = true;
     this.highScore = 0;
     this.gameOverPanel.classList.remove("displayBlock");
+    this.toggleButton.classList.remove("displayNone");
+    if(this.oScoreDiv.classList.contains("selectedPlayer")){
+      this.oScoreDiv.classList.remove("selectedPlayer");
+      this.xScoreDiv.classList.add("selectedPlayer");
+    }
     for(var key in this.containers) {
       if(key !== "container-04") {
         this.containers[key].classList.remove("active");
@@ -130,27 +143,47 @@ class Home extends Component {
 
   togglePlayer = (event) => {
     event.preventDefault();
-    this.gameOverPanel.classList.add("displayBlock");
+    if(this.state.player === "x"){
+      this.setState({player: "o"});
+      this.oScoreDiv.classList.add("selectedPlayer");
+      this.xScoreDiv.classList.remove("selectedPlayer");
+      this.playerX = false;
+    } else {
+      this.setState({player: "x"});
+      this.oScoreDiv.classList.remove("selectedPlayer");
+      this.xScoreDiv.classList.add("selectedPlayer");
+      this.playerX = true;
+    }
+    /*
+    if(this.gameOverPanel.classList.contains("displayBlock")){
+      this.gameOverPanel.classList.remove("displayBlock");
+    } else {
+      this.gameOverPanel.classList.add("displayBlock");
+    }
+    */
   }
 
   saveGame = () => {
     //Send game progress to the server
     const gamePackage = {gridcells: this.state.gridcells[0], player: this.state.player, playersTurn: true, turn: this.turn, xScore: this.xScore, oScore: this.oScore};
     const game = `game=${JSON.stringify(gamePackage)}`;
-    fetch('/users/game', {method: 'PUT', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin', 'x-auth-token': localStorage.getItem('accessToken')}), body: game})
+    fetch('https://tictactoeplus.com:3001/users/game', {method: 'PUT', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin', 'x-auth-token': localStorage.getItem('accessToken')}), body: game})
     .then(response => {})
     .catch(error => console.log(error))
   }
 
   updateCell = (gridNumber, cellName, player) => {
-    if(this.state.gridcells[0][cellName] === "none") {
+    if(this.state.gridcells[0][cellName] === "none" && this.containers["container-0" + gridNumber].classList.contains("active")) {
       // Update grid item with player piece
       let cells = this.state.gridcells;
       cells[0][cellName] = player;
       this.setState({errorMsg:"", gridcells:cells});
       this.updateScore(gridNumber, cellName);
       this.turn += 1;
-      this.saveGame();
+      if(!this.toggleButton.classList.contains("displayNone")){
+        this.toggleButton.classList.add("displayNone");
+      }
+      //this.saveGame();
       //Switch player between human and computer(or friend)
       if(this.state.playersTurn === true) {
         this.setState({playersTurn:false});
@@ -158,33 +191,11 @@ class Home extends Component {
         this.setState({playersTurn:true});
       }
       //Display next grid container when current container is full
-      for(var i = 0; i < 9; i++) {
-        let key = "cell-" + ((gridNumber * 9) + i);
-        if(this.state.gridcells[0][key] === "none"){
-          break;
-        } else if(key === "cell-44" && this.state.gridcells[0][key] !== "none") {
-          this.containers["container-05"].classList.add("active");
-        } else if(key === "cell-53" && this.state.gridcells[0][key] !== "none") {
-          this.containers["container-02"].classList.add("active");
-        } else if(key === "cell-26" && this.state.gridcells[0][key] !== "none") {
-          this.containers["container-01"].classList.add("active");
-        } else if(key === "cell-17" && this.state.gridcells[0][key] !== "none") {
-          this.containers["container-00"].classList.add("active");
-        } else if(key === "cell-8" && this.state.gridcells[0][key] !== "none") {
-          this.containers["container-03"].classList.add("active");
-        } else if(key === "cell-35" && this.state.gridcells[0][key] !== "none") {
-          this.containers["container-06"].classList.add("active");
-        } else if(key === "cell-62" && this.state.gridcells[0][key] !== "none") {
-          this.containers["container-07"].classList.add("active");
-        } else if(key === "cell-71" && this.state.gridcells[0][key] !== "none") {
-          this.containers["container-08"].classList.add("active");
-        } else if(key === "cell-80" && this.state.gridcells[0][key] !== "none") {
-          this.setState({errorMsg:"Game Over"});
-          this.gameOverPanel.classList.add("displayBlock");
-        }
-      }
+      this.displayNextContainer(gridNumber);
     } else if (this.state.gridcells[0][cellName] === "x" || this.state.gridcells[0][cellName] === "o") {
       this.setState({errorMsg:"Please select an empty square"});
+    } else {
+      this.setState({errorMsg:"Please select an active square"});
     }
   }
 
@@ -210,6 +221,8 @@ class Home extends Component {
       } else if(key === "cell-71" && this.state.gridcells[0][key] !== "none") {
         this.containers["container-08"].classList.add("active");
       } else if(key === "cell-80" && this.state.gridcells[0][key] !== "none") {
+        this.setState({errorMsg:"Game Over"});
+        this.gameOverPanel.classList.add("displayBlock");
       }
     }
   }
@@ -392,17 +405,18 @@ class Home extends Component {
     return(
       <div className="Home">
         <div className="box">
-          <Header />
+          {/* <Header /> */}
           <div className="scoreboard">
-            <div className="score">X : {this.xScore}</div><div className="score">O : {this.oScore}</div><div className="score">Turn : {this.turn}</div>
+            <div className="score" ref={(element) => {this.xScoreDiv = element;}}>X : {this.xScore}</div><div className="score" ref={(element) => {this.oScoreDiv = element;}}>O : {this.oScore}</div>
           </div>
           <div className="togglePlayer">
             <button className="togglePlayerBtn" onClick={(event) => this.togglePlayer(event)} ref={(element) => {this.toggleButton = element;}}>{this.toggleButtonText}</button>
           </div>
           <div className="gameOverPanel" ref={(element) => {this.gameOverPanel = element;}}>
             <h1 className="gameOverTitle">Thanks for playing!</h1>
-            <p className="gameOverText">Your Score: {this.xScore}<br/>High Score: {this.highScore}</p>
+            {(this.playerX)?(<p className="gameOverText">Your Score: {this.xScore}</p>):(<p className="gameOverText">Your Score: {this.oScore}</p>)}
             <button className="playAgain" onClick={(event) => this.playAgain(event)}>Play Again</button>
+            {/*
             <button className="challengeFriends" onClick={(event) => this.challengeFriends(event)}>
               Challenge a Friend &nbsp;
               <svg className="igLogo" viewBox="0 0 503.84 503.84">
@@ -411,9 +425,11 @@ class Home extends Component {
                 <circle cx="386.4" cy="117.44" r="30.23"/>
               </svg>
             </button>
+            */}
           </div>
+          <div className="errorMsg">{this.state.errorMsg}</div>
           <div className="container">
-            <div className="cell cell1 container-00" ref={(element) => {this.containers["container-00"] = element;}}>
+            <div className="container-00" ref={(element) => {this.containers["container-00"] = element;}}>
               {this.cellHtml(0, "cell1", "cell-0")}
               {this.cellHtml(0, "cell2", "cell-1")}
               {this.cellHtml(0, "cell3", "cell-2")}
@@ -424,7 +440,7 @@ class Home extends Component {
               {this.cellHtml(0, "cell8", "cell-7")}
               {this.cellHtml(0, "cell9", "cell-8")}
             </div>
-            <div className="cell2 container-01" ref={(element) => {this.containers["container-01"] = element;}}>
+            <div className="container-01" ref={(element) => {this.containers["container-01"] = element;}}>
               {this.cellHtml(1, "cell1", "cell-9")}
               {this.cellHtml(1, "cell2", "cell-10")}
               {this.cellHtml(1, "cell3", "cell-11")}
@@ -435,7 +451,7 @@ class Home extends Component {
               {this.cellHtml(1, "cell8", "cell-16")}
               {this.cellHtml(1, "cell9", "cell-17")}
             </div>
-            <div className="cell3 container-02" ref={(element) => {this.containers["container-02"] = element;}}>
+            <div className="container-02" ref={(element) => {this.containers["container-02"] = element;}}>
               {this.cellHtml(2, "cell1", "cell-18")}
               {this.cellHtml(2, "cell2", "cell-19")}
               {this.cellHtml(2, "cell3", "cell-20")}
@@ -446,7 +462,7 @@ class Home extends Component {
               {this.cellHtml(2, "cell8", "cell-25")}
               {this.cellHtml(2, "cell9", "cell-26")}
             </div>
-            <div className="cell4 container-03" ref={(element) => {this.containers["container-03"] = element;}}>
+            <div className="container-03" ref={(element) => {this.containers["container-03"] = element;}}>
               {this.cellHtml(3, "cell1", "cell-27")}
               {this.cellHtml(3, "cell2", "cell-28")}
               {this.cellHtml(3, "cell3", "cell-29")}
@@ -457,7 +473,7 @@ class Home extends Component {
               {this.cellHtml(3, "cell8", "cell-34")}
               {this.cellHtml(3, "cell9", "cell-35")}
             </div>
-            <div className="active cell5 container-04" ref={(element) => {this.containers["container-04"] = element;}}>
+            <div className="active container-04" ref={(element) => {this.containers["container-04"] = element;}}>
               {this.cellHtml(4, "cell1", "cell-36")}
               {this.cellHtml(4, "cell2", "cell-37")}
               {this.cellHtml(4, "cell3", "cell-38")}
@@ -468,7 +484,7 @@ class Home extends Component {
               {this.cellHtml(4, "cell8", "cell-43")}
               {this.cellHtml(4, "cell9", "cell-44")}
             </div>
-            <div className="cell6 container-05" ref={(element) => {this.containers["container-05"] = element;}}>
+            <div className="container-05" ref={(element) => {this.containers["container-05"] = element;}}>
               {this.cellHtml(5, "cell1", "cell-45")}
               {this.cellHtml(5, "cell2", "cell-46")}
               {this.cellHtml(5, "cell3", "cell-47")}
@@ -479,7 +495,7 @@ class Home extends Component {
               {this.cellHtml(5, "cell8", "cell-52")}
               {this.cellHtml(5, "cell9", "cell-53")}
             </div>
-            <div className="cell7 container-06" ref={(element) => {this.containers["container-06"] = element;}}>
+            <div className="container-06" ref={(element) => {this.containers["container-06"] = element;}}>
               {this.cellHtml(6, "cell1", "cell-54")}
               {this.cellHtml(6, "cell2", "cell-55")}
               {this.cellHtml(6, "cell3", "cell-56")}
@@ -490,7 +506,7 @@ class Home extends Component {
               {this.cellHtml(6, "cell8", "cell-61")}
               {this.cellHtml(6, "cell9", "cell-62")}
             </div>
-            <div className="cell8 container-07" ref={(element) => {this.containers["container-07"] = element;}}>
+            <div className="container-07" ref={(element) => {this.containers["container-07"] = element;}}>
               {this.cellHtml(7, "cell1", "cell-63")}
               {this.cellHtml(7, "cell2", "cell-64")}
               {this.cellHtml(7, "cell3", "cell-65")}
@@ -501,7 +517,7 @@ class Home extends Component {
               {this.cellHtml(7, "cell8", "cell-70")}
               {this.cellHtml(7, "cell9", "cell-71")}
             </div>
-            <div className="cell9 container-08" ref={(element) => {this.containers["container-08"] = element;}}>
+            <div className="container-08" ref={(element) => {this.containers["container-08"] = element;}}>
               {this.cellHtml(8, "cell1", "cell-72")}
               {this.cellHtml(8, "cell2", "cell-73")}
               {this.cellHtml(8, "cell3", "cell-74")}
@@ -513,11 +529,12 @@ class Home extends Component {
               {this.cellHtml(8, "cell9", "cell-80")}
             </div>
           </div>
-          <div className="errorMsg">{this.state.errorMsg}</div>
         </div>
+        {/*
         <div className="footer">
           <div className="footerText">&#169; <a href="https://raymondmutyaba.com/" className="copyrightText">Raymond Mutyaba</a> 2019</div>
         </div>
+        */}
       </div>
     );
   }
