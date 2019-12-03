@@ -8,6 +8,7 @@ body{
 }
 .box{
   min-height: calc(100vh - 4rem);
+  min-width: calc(100vh - 4rem);
 }
 
 /*Header*/

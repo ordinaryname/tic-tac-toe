@@ -173,30 +173,24 @@ class Home extends Component {
   }
 
   updateCell = (gridNumber, cellName, player) => {
-    if(this.state.gridcells[0][cellName] === "none" && this.containers["container-0" + gridNumber].classList.contains("active")) {
-      // Update grid item with player piece
-      let cells = this.state.gridcells;
-      cells[0][cellName] = player;
-      this.setState({errorMsg:"", gridcells:cells});
-      this.updateScore(gridNumber, cellName);
-      this.turn += 1;
-      if(!this.toggleButton.classList.contains("displayNone")){
-        this.toggleButton.classList.add("displayNone");
-      }
-      //this.saveGame();
-      //Switch player between human and computer(or friend)
-      if(this.state.playersTurn === true) {
-        this.setState({playersTurn:false});
-      } else {
-        this.setState({playersTurn:true});
-      }
-      //Display next grid container when current container is full
-      this.displayNextContainer(gridNumber);
-    } else if (this.state.gridcells[0][cellName] === "x" || this.state.gridcells[0][cellName] === "o") {
-      this.setState({errorMsg:"Please select an empty square"});
-    } else {
-      this.setState({errorMsg:"Please select an active square"});
+    // Update grid item with player piece
+    let cells = this.state.gridcells;
+    cells[0][cellName] = player;
+    this.setState({errorMsg:"", gridcells:cells});
+    this.updateScore(gridNumber, cellName);
+    this.turn += 1;
+    if(!this.toggleButton.classList.contains("displayNone")){
+      this.toggleButton.classList.add("displayNone");
     }
+    //this.saveGame();
+    //Switch player between human and computer(or friend)
+    if(this.state.playersTurn === true) {
+      this.setState({playersTurn:false});
+    } else {
+      this.setState({playersTurn:true});
+    }
+    //Display next grid container when current container is full
+    this.displayNextContainer(gridNumber);
   }
 
   displayNextContainer = (gridNumber) => {
@@ -229,15 +223,21 @@ class Home extends Component {
 
   selectCell = (event, gridNumber, cellName) => {
     event.preventDefault();
-    this.updateCell(gridNumber, cellName, this.state.player);
-    if(this.state.player === "x") {
-      if(this.turn !== 81) {
-        this.computersTurn("o");
+    if(this.state.gridcells[0][cellName] === "none" && this.containers["container-0" + gridNumber].classList.contains("active")) {
+      this.updateCell(gridNumber, cellName, this.state.player);
+      if(this.state.player === "x") {
+        if(this.turn !== 81) {
+          this.computersTurn("o");
+        }
+      } else {
+        if(this.turn !== 81) {
+          this.computersTurn("x");
+        }
       }
+    } else if (this.state.gridcells[0][cellName] === "x" || this.state.gridcells[0][cellName] === "o") {
+      this.setState({errorMsg:"Please select an empty square"});
     } else {
-      if(this.turn !== 81) {
-        this.computersTurn("x");
-      }
+      this.setState({errorMsg:"Please select an active square"});
     }
   }
 
