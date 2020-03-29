@@ -8,6 +8,7 @@ import Challenge from './components/Challenge';
 import Game from './components/Game';
 import Error from './components/Error';
 import Login from './components/Login';
+import Settings from './components/Settings';
 
 class App extends Component {
   render() {
@@ -16,6 +17,7 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
           <Route path="/" component={Home} exact/>
+          <Route path="/settings" component={Settings} exact/>
           <Route path="/challenge" component={Challenge} exact/>
           <Route path='/game' component={Game} exact/>
           <Route path='/login' render={(props) => <Login {...props} login={true} />}/>

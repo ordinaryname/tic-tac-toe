@@ -12,10 +12,13 @@ class Login extends Component {
       username:'',
       password:'',
     };
+    this.usernameRef = React.createRef();
   }
 
-  componentWillMount(){
-    this.setState({login:this.props.login});
+  componentDidMount(){
+    this.setState({login:this.props.login, username:this.props.location.state.proposedUsername});
+    this.usernameRef.current.value = this.props.location.state.proposedUsername;
+    const {proposedUsername} = this.props.location.state;
   }
 
   getUsername = (event) => {
@@ -69,7 +72,7 @@ class Login extends Component {
     return(
       <div className="loginHTML">
         <h2 className="defaultTitle">Login</h2>
-        <input type="text" className="defaultInput" placeholder="username" onChange={this.getUsername} onKeyUp={this.getUsername}/>
+        <input type="text" className="defaultInput" placeholder="username" onChange={this.getUsername} onKeyUp={this.getUsername} ref={this.usernameRef}/>
         <input type="password" className="defaultInput" placeholder="password" onChange={this.getPassword} onKeyUp={this.getPassword}/>
         <button className="defaultButton" onClick={this.login}>Login</button>
         <button className="defaultButton" onClick={(event) => this.setLoginBoolean(event, false)}>Already have a username? Signup.</button>
@@ -82,7 +85,7 @@ class Login extends Component {
     return(
       <div className="signupHTML">
         <h2 className="defaultTitle">Signup</h2>
-        <input type="text" className="defaultInput" placeholder="username" onChange={this.getUsername} onKeyUp={this.getUsername}/>
+        <input type="text" className="defaultInput" placeholder="username" onChange={this.getUsername} onKeyUp={this.getUsername} ref={this.usernameRef}/>
         <input type="password" className="defaultInput" placeholder="password" onChange={this.getPassword} onKeyUp={this.getPassword}/>
         <button className="defaultButton" onClick={this.signup}>Create</button>
         <button className="defaultButton" onClick={(event) => this.setLoginBoolean(event, true)}>Already have a username? Login.</button>
