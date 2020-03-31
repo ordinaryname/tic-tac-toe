@@ -136,11 +136,16 @@ body{
   color: #ffffff;
 }
 .errorMsg{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #990000;
   margin: 0 0 1rem 0;
   padding: 1.25rem;
-  color: #990000;
+  color: white;
   text-align: center;
   font-size: 1.25rem;
+  display: none;
 }
 .scoreboard{
   display: grid;
@@ -159,10 +164,11 @@ body{
   font-size: 2rem;
 }
 .encouragement{
-  display: grid;
-  grid-area: 2 / 1 / 3 / 4;
-  grid: 1fr;
-  grid-gap: 3px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #0000aa;
+  display: none;
 }
 .encouragementText{
   margin: 10px;
@@ -180,8 +186,8 @@ body{
 /*Game Over Panel*/
 
 .gameOverPanel{
-  position: absolute;
-  top: 30vh;
+  position: fixed;
+  top: 10vh;
   left: 30vw;
   margin-left: auto;
   margin-right: auto;

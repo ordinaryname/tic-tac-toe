@@ -32,6 +32,8 @@ class Home extends Component {
     this.playerX = true;
     this.highScore = 0;
     this.gameOverPanel = React.createRef();
+    this.encouragementPanel = React.createRef();
+    this.errorPanel = React.createRef();
     this.optimumScore = 0;
   }
 
@@ -107,6 +109,10 @@ class Home extends Component {
         {value: '#f8f8f8', easing: 'linear'}
       ],
       loop: 2,
+    }).finished.then(() => {
+      if(this.encouragementPanel.classList.contains("displayBlock")){
+        this.encouragementPanel.classList.remove("displayBlock");
+      }
     });
   }
 
@@ -140,6 +146,8 @@ class Home extends Component {
     this.highScore = 0;
     this.gameOverPanel.classList.remove("displayBlock");
     this.toggleButton.classList.remove("displayNone");
+    this.encouragementPanel.classList.remove("displayBlock");
+    this.errorPanel.classList.remove("displayBlock");
     if(this.oScoreDiv.classList.contains("selectedPlayer")){
       this.oScoreDiv.classList.remove("selectedPlayer");
       this.xScoreDiv.classList.add("selectedPlayer");
@@ -175,6 +183,9 @@ class Home extends Component {
     let cells = this.state.gridcells;
     cells[0][cellName] = player;
     this.setState({errorMsg:"", gridcells:cells});
+    if(this.errorPanel.classList.contains("displayBlock")){
+      this.errorPanel.classList.remove("displayBlock");
+    }
     if(this.playersTurn) {
       this.updateScore(gridNumber, cellName);
     }
@@ -229,8 +240,14 @@ class Home extends Component {
       }
     } else if (this.state.gridcells[0][cellName] === "x" || this.state.gridcells[0][cellName] === "o") {
       this.setState({errorMsg:"Please select an empty square"});
+      if(!this.errorPanel.classList.contains("displayBlock")){
+        this.errorPanel.classList.add("displayBlock");
+      }
     } else {
       this.setState({errorMsg:"Please select an active square"});
+      if(!this.errorPanel.classList.contains("displayBlock")){
+        this.errorPanel.classList.add("displayBlock");
+      }
     }
   }
 
@@ -265,6 +282,9 @@ class Home extends Component {
   }
 
   renderEncouragement = () => {
+    if(!this.encouragementPanel.classList.contains("displayBlock")){
+      this.encouragementPanel.classList.add("displayBlock");
+    }
     this.animateEncouragement();
   }
 
@@ -446,6 +466,7 @@ class Home extends Component {
     return(
       <div className="Home">
         <div className="box">
+
           <Header />
           <div className="gameOverPanel" ref={(element) => {this.gameOverPanel = element;}}>
             <h1 className="gameOverTitle">Thanks for playing!</h1>
@@ -463,16 +484,16 @@ class Home extends Component {
             </button>
             */}
           </div>
-          <div className="errorMsg">{this.state.errorMsg}</div>
+          <div className="errorMsg" ref={(element) => {this.errorPanel = element;}}>{this.state.errorMsg}</div>
+          <div className="encouragement" ref={(element) => {this.encouragementPanel = element;}}>
+            <div className="encouragementText">
+              {this.encouragementText}
+            </div>
+          </div>
           <div className="gameContainer">
             <div className="container">
               <div className="scoreboard">
                 <div className="score" ref={(element) => {this.xScoreDiv = element;}}>X : {this.xScore}</div><div className="score" ref={(element) => {this.oScoreDiv = element;}}>O : {this.oScore}</div>
-              </div>
-              <div className="encouragement">
-                <div className="encouragementText">
-                  {this.encouragementText}
-                </div>
               </div>
               <div className="togglePlayer">
                 <button className="togglePlayerBtn" onClick={(event) => this.togglePlayer(event)} ref={(element) => {this.toggleButton = element;}}>{this.toggleButtonText}</button>
