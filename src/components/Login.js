@@ -16,10 +16,12 @@ class Login extends Component {
   }
 
   componentDidMount(){
-    this.setState({login:this.props.login, username:this.props.location.state.proposedUsername});
-    this.usernameRef.current.value = this.props.location.state.proposedUsername;
-    this.usernameRef.current.focus();
-    const {proposedUsername} = this.props.location.state;
+    if(this.props.location.state.proposedUsername){
+      this.setState({login:this.props.login, username:this.props.location.state.proposedUsername});
+      this.usernameRef.current.value = this.props.location.state.proposedUsername;
+      this.usernameRef.current.focus();
+      const {proposedUsername} = this.props.location.state;
+    }
   }
 
   getUsername = (event) => {
