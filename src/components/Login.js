@@ -34,7 +34,7 @@ class Login extends Component {
 
   signup = (event) => {
     event.preventDefault();
-    const url = '/signup';
+    const url = '/register';
     const signupData = `username=${this.state.username.toLowerCase()}&password=${this.state.password}`;
     fetch(url, {method: 'POST', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin'}), body: signupData})
     .then(response => {
@@ -51,7 +51,7 @@ class Login extends Component {
 
   login = (event) => {
     event.preventDefault();
-    const url = '/login';
+    const url = '/signin';
     const loginData = `username=${this.state.username.toLowerCase()}&password=${this.state.password}`;
     fetch(url, {method: 'PUT', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin'}), body: loginData})
     .then(response => {
