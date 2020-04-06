@@ -1,6 +1,6 @@
 function getUser() {
   let user = {};
-  fetch('https://tictactoeplus.com:3001/users/me', {method: 'GET', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin', 'x-auth-token': localStorage.getItem('accessToken')})})
+  fetch('https://tictactoeplus.com/users/me', {method: 'GET', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin', 'x-auth-token': localStorage.getItem('accessToken')})})
   .then(response => {})
   .then(data => {
     user = data;
@@ -11,7 +11,7 @@ function getUser() {
 
 function saveGame(gamePackage) {
   const game = `game=${JSON.stringify(gamePackage)}`;
-  fetch('https://tictactoeplus.com:3001/users/game', {method: 'PUT', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin', 'x-auth-token': localStorage.getItem('accessToken')}), body: game})
+  fetch('https://tictactoeplus.com/users/game', {method: 'PUT', credentials: "include", redirect: 'follow', headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json', 'credentials': 'same-origin', 'x-auth-token': localStorage.getItem('accessToken')}), body: game})
   .then(response => {})
   .catch(error => console.log(error));
 }
