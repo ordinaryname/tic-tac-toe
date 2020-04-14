@@ -9,6 +9,8 @@ import Game from './components/Game';
 import Error from './components/Error';
 import Login from './components/Login';
 import Settings from './components/Settings';
+import Profile from './components/Profile';
+import Player from './components/Player';
 
 class App extends Component {
   render() {
@@ -18,6 +20,8 @@ class App extends Component {
         <Switch>
           <Route path="/" component={Home} exact/>
           <Route path="/settings" component={Settings} exact/>
+          <Route path="/profile" component={Profile} exact/>
+          <Route path="/player/:player" component={Player} exact/>
           <Route path="/challenge" component={Challenge} exact/>
           <Route path='/game' component={Game} exact/>
           <Route path='/login' render={(props) => <Login {...props} login={true} />}/>

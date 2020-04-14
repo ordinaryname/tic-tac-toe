@@ -566,6 +566,60 @@ body{
   cursor: pointer;
 }
 
+/*Profile JS*/
+
+.usernameTitle{
+  width: 100%;
+  padding: 20px;
+  font-size: 2.4em;
+  color: #555555;
+}
+.tabs{
+  width: 100%;
+  padding: 0;
+}
+.notifications{
+  width: 100%;
+  padding: 10px;
+  color: #555555;
+  font-size: 1em;
+}
+.rankings{
+  width: 100%;
+  padding: 10px;
+  color: #555555;
+  font-size: 1em;
+}
+.challengers{
+  width: 100%;
+  padding: 10px;
+  color: #555555;
+  font-size: 1em;
+}
+ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.tabTitle{
+  display: inline-block;
+  width: 33.33%;
+  width: calc(100% / 3);
+  padding: 10px 0;
+  text-align: center;
+  color: #555555;
+  font-size: 1em;
+  border-bottom: 2px solid #555555;
+  background-color: none;
+}
+.tabTitle:hover{
+  background-color: #eeeeee;
+  cursor: pointer;
+}
+.activeTab{
+  background-color: #eeeeee;
+}
+
 /*Footer*/
 
 .footer{
